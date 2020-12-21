@@ -74,6 +74,6 @@ string = "From stephen.marquard@uct.ac.us Sat Jan"
 re.findall('^From (\S+@\S+)', string)
 ```  
 will return `['stephen.marquard@uct.ac.us']`.  
-The method tries to find mathces with the expression, but extracts only the portion within the paranthesis.
+The method tries to find matches with the expression, but extracts only the portion within the paranthesis.
 
 
