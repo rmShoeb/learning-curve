@@ -2,10 +2,25 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+posts = [
+    {
+        'author':       'Riyad Morshed',
+        'title':        'Hello World!',
+        'content':      'Hello World!',
+        'date posted':  'May 7, 2021'
+    },
+    {
+        'author':       'John Doe',
+        'title':        'Hello World!-2',
+        'content':      'Hello World!',
+        'date posted':  'May 6, 2021'
+    }
+]
+
 @app.route('/')
 @app.route('/home')
 def hello():
-    return render_template('home.html')
+    return render_template('home.html', posts=posts)
 
 @app.route('/about')
 def about():
