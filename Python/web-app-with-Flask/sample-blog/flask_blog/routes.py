@@ -26,6 +26,10 @@ posts = [
 def home():
     return render_template('home.html', posts=posts)
 
+@app.route('/about')
+def about():
+    return render_template('about.html', title='About')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -60,6 +64,6 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/about')
-def about():
-    return render_template('about.html', title='About')
+@app.route('/profile')
+def profile():
+    return render_template('profile.html', title='Profile')
