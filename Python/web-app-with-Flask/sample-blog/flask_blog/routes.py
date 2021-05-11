@@ -1,5 +1,5 @@
-from flask import render_template, url_for, flash, redirect
-from flask_login import login_user, current_user, logout_user
+from flask import render_template, url_for, flash, redirect, request
+from flask_login import login_user, current_user, logout_user, login_required
 
 from flask_blog import app, db, bcrypt
 from flask_blog.forms import RegistrationForm, LoginForm
@@ -40,7 +40,8 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash(f'Welcome back {form.username.data}!', 'success')
-            return redirect(url_for('home'))
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash(f'Incorrect information!', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -65,5 +66,6 @@ def logout():
     return redirect(url_for('home'))
 
 @app.route('/profile')
+@login_required
 def profile():
     return render_template('profile.html', title='Profile')
