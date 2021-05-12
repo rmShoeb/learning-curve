@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
 from flask_blog import app, db, bcrypt
-from flask_blog.forms import RegistrationForm, LoginForm
+from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_blog.models import User, Post
 
 
@@ -65,8 +65,19 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Information Updated', 'info')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
     image_file = url_for('static', filename=f'profile_pics/{current_user.profile_pic}')
-    return render_template('profile.html', title='Profile', image_file=image_file)
+    return render_template('profile.html', title='Profile', image_file=image_file, form=form)
+
