@@ -5,28 +5,14 @@ import secrets, os
 from PIL import Image
 
 from flask_blog import app, db, bcrypt
-from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreatePost
 from flask_blog.models import User, Post
 
-
-posts = [
-    {
-        'author':       'Riyad Morshed',
-        'title':        'Hello World!',
-        'content':      'Hello World!',
-        'date posted':  'May 7, 2021'
-    },
-    {
-        'author':       'John Doe',
-        'title':        'Hello World!-2',
-        'content':      'Hello World!',
-        'date posted':  'May 6, 2021'
-    }
-]
 
 @app.route('/')
 @app.route('/home')
 def home():
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 @app.route('/about')
@@ -99,4 +85,16 @@ def profile():
         form.email.data = current_user.email
     image_file = url_for('static', filename=f'profile_pics/{current_user.profile_pic}')
     return render_template('profile.html', title='Profile', image_file=image_file, form=form)
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = CreatePost()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Post created', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='Create Post', form=form)
 
