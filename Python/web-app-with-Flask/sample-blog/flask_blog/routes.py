@@ -1,6 +1,9 @@
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
+import secrets, os
+from PIL import Image
+
 from flask_blog import app, db, bcrypt
 from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_blog.models import User, Post
@@ -65,11 +68,27 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
+
+def save_profile_picture(profile_pic):
+    random_hex = secrets.token_hex(8)
+    _, file_ext = os.path.splitext(profile_pic.filename)
+    hex_fn = random_hex+file_ext
+    path = os.path.join(app.root_path, 'static/profile_pics', hex_fn)
+    
+    img = Image.open(profile_pic)
+    img.thumbnail((125, 125))
+    img.save(path)
+
+    return hex_fn
+
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        if form.profile_pic.data:
+            current_user.profile_pic = save_profile_picture(form.profile_pic.data)
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
