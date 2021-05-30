@@ -11,7 +11,8 @@
 		```python
 		from sklearn.preprocessing import Normalizer
 		# or
-		from scipy.stats import boxcox
+		from scipy import stats
+		bc, maxlog = stats.boxcox(x) # x is an ndarray to be normalized
 		```
 	- **Standardization:** also called called **z-score normalization**
 		```python
