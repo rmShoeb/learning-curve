@@ -1,0 +1,83 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\usetheme{Madrid}
+% \usecolortheme{dove}
+
+\title[Short title]{\texttt{beamer}}
+\author[RM Shoeb]{Riyad Morshed Shoeb}
+\institute[RUET]{Rajshahi University of Engineering and Technology}
+\logo{\includegraphics[width=10mm]{ruet.jpg}}
+\date{\today}
+
+\begin{document}
+\setbeamercovered{transparent}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\section{Introduction}\label{sec:intro}
+\begin{frame}[c]{\nameref{sec:intro}}
+    \lipsum[1-1]
+\end{frame}
+\begin{frame}[allowframebreaks]{\nameref{sec:intro}}
+    \lipsum[1-2]
+\end{frame}
+
+\section{Blocks}
+\begin{frame}{Blocks}
+\begin{block}{Information}
+	This is topic 6
+\end{block}
+\pause
+\begin{alertblock}{Alert}
+	One must never remain hungry
+\end{alertblock}
+\begin{example}
+	$2 + 2 = 4$
+\end{example}
+\end{frame}
+
+\section{Columns}
+\begin{frame}{Columns}
+	\begin{columns}
+		\column{0.3\textwidth}
+		\begin{block}{Information}
+			This is topic 6
+		\end{block}
+		\column{0.3\textwidth}
+		\begin{alertblock}{Alert}
+			One must never remain hungry
+		\end{alertblock}
+		\column{0.3\textwidth}
+		\begin{example}
+			$2 + 2 = 4$
+		\end{example}	
+	\end{columns}
+\end{frame}
+
+\section{Overlays}
+\begin{frame}[allowframebreaks]{Overlays}
+\begin{itemize}
+    \item<3-> one % show this from slide 3
+    \item<1-> two
+    \item<5-> three
+    \item<6> four % show this only on slide 6
+    \item<2-> five
+    \item<4-> six \pause
+    \item one
+    \item two
+    \item three
+    \item four
+    \item five
+    \item six
+\end{itemize}    
+\end{frame}
+
+\begin{frame}{Frame Title}
+    \lipsum[1-1]
+\end{frame}
+
+\end{document}
