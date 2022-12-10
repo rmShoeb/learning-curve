@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Places</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+</head>
+
+<body>
+    <div class="form-control" id="add-new-place">
+        <h3>Add a new tourist place</h3>
+        <span id="update-img-preview" hidden>
+            <img src="" alt="">
+            <p>Saved Image</p>
+        </span>
+        <form name="add-new-place">
+            <input type="hidden" name="index" id="place-index">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" maxlength=30 placeholder="Beach">
+            <br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" maxlength=30 placeholder="Cox's Bazar">
+            <br>
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" max="5" min="1" placeholder="(between 1 and 5)">
+            <br>
+            <label for="picture">Picture:</label>
+            <input type="file" id="picture" name="picture" accept="image/*">
+            <p class="text-right">
+                <button type="reset" class="reset" id="reset-place-form">Reset</button>
+                <button class="submit" id="btn-submit-new-place">Submit</button>
+                <button class="submit" id="btn-update-place" hidden>Update</button>
+            </p>
+            <p class="text-right">
+                <a href="#" id="back-to-tourist">Back to Tourist Place List</a>
+            </p>
+        </form>
+    </div>
+    <div id="places-list" hidden>
+        <div id="search-places">
+            <form name="search-tourist-places">
+                <input type="text" id="search-box" name="search" placeholder="Search Place Name" required>
+                <!-- <button class="submit">Search</button> -->
+            </form>
+        </div>
+        <div class="container" id="heading">
+            <div id="header-name">NAME</div>
+            <div id="header-address">ADDRESS</div>
+            <div id="header-rating">RATING</div>
+            <div>PICTURE</div>
+            <div>ACTIONS</div>
+            <form name="sorted-data" hidden>
+                <input name="name" value="">
+                <input name="address" value="">
+                <input name="rating" value="">
+            </form>
+        </div>
+        <div class="container" id="container-for-places-list">
+            <!-- the list will show up here -->
+        </div>
+        <button class="create-new" id="create-new-place">Create New Tourist Place</button>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
