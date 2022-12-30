@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./calculator.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div ng-app="calculatorApp" ng-controller="calculatorCtrl">
+        <h1>Calculator App</h1>
+        <p>
+            <input type="text" ng-model="operand1">
+            {{operator}}
+            <input type="text" ng-model="operand2">
+            <button ng-click="SolveFunc()">=</button>
+            {{answer}}
+        </p>
+        Choose operation:
+        <button ng-click="SetOperatorFunc('+')">+</button>
+        <button ng-click="SetOperatorFunc('-')">-</button>
+        <button ng-click="SetOperatorFunc('X')">X</button>
+        <button ng-click="SetOperatorFunc('/')">/</button>
+    </div>
+</body>
+
+</html>

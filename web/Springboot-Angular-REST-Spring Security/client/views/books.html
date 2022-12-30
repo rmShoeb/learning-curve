@@ -1,0 +1,28 @@
+<div class="alert alert-primary text-center h1" role="alert">
+    Books
+</div>
+
+<table class="table table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="book in books">
+            <td>{{book.id}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>
+                <a ui-sref="EditUpdate({ id: book.id })" class="btn btn-warning btn-sm">Edit</a>
+                <a ui-sref="delete({ id: book.id })" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a ui-sref="EditUpdate" class="btn btn-primary">Add New Book</a>
+<ng-include src="'views/logout.html'"></ng-include>
