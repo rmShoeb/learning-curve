@@ -2,8 +2,10 @@ package com.javatpoint.controller;
 
 import java.util.List;
 
-import com.javatpoint.model.*;
-import com.javatpoint.service.AuthorService;
+import com.javatpoint.model.AuthenticationRequest;
+import com.javatpoint.model.AuthenticationResponse;
+import com.javatpoint.model.Book;
+import com.javatpoint.model.MyUserDetails;
 import com.javatpoint.service.BookService;
 import com.javatpoint.service.MyUserDetailsService;
 import com.javatpoint.util.JwtUtil;
@@ -19,8 +21,6 @@ public class BookController
 {
     @Autowired
     private BookService bookService;
-    @Autowired
-    private AuthorService authorService;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -41,31 +41,28 @@ public class BookController
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    // book apis
-    @GetMapping("/books")
+    @GetMapping("/book")
     private List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
     @PostMapping("/book/new")
-    private void saveBook(@RequestBody Book book) {bookService.saveOrUpdate(book);}
+    private void saveBook(@RequestBody Book book)
+    {
+        bookService.saveOrUpdate(book);
+//        return "book with ID "+book.getId()+" saved!";
+    }
     @PutMapping("/book/update")
-    private void update(@RequestBody Book book) {bookService.saveOrUpdate(book);}
+    private void update(@RequestBody Book book) {
+        bookService.saveOrUpdate(book);
+//        return book;
+    }
     @GetMapping("/book/{id}")
     private Book getBook(@PathVariable("id") int id) {
         return bookService.getBookById(id);
     }
     @DeleteMapping("/book/{id}")
-    private void deleteBook(@PathVariable("id") int id) {bookService.delete(id);}
-
-    // author apis
-    @GetMapping("/authors")
-    private List<Author> getAllAuthors(){return authorService.getAllAuthors();}
-    @GetMapping("/author/{id}")
-    private Author getAuthorById(@PathVariable("id") int id) {return authorService.getAuthorById(id);}
-    @PostMapping("/author/new")
-    private void addNewAuthor(@RequestBody Author author) {authorService.saveOrUpdate(author);}
-    @PutMapping("/author/update")
-    private void updateAuthor(@RequestBody Author author) {authorService.saveOrUpdate(author);}
-    @DeleteMapping("/author/{id}")
-    private void deleteAuthor(@PathVariable("id") int id) {authorService.delete(id);}
+    private void deleteBook(@PathVariable("id") int id) {
+        bookService.delete(id);
+//        return "Student with ID "+id+" deleted!";
+    }
 }

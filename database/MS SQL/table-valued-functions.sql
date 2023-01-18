@@ -1,0 +1,16 @@
+-- CREATE OR ALTER FUNCTION uDefFunc.GetProductByYear(
+--     @model_year INT
+-- )
+-- RETURNS TABLE AS
+-- RETURN
+--     SELECT
+--         product_name,
+--         list_price
+--     FROM
+--         production.products
+--     WHERE
+--         model_year = @model_year
+-- ;
+-- SELECT *
+-- FROM uDefFunc.GetProductByYear(2018)
+-- ;

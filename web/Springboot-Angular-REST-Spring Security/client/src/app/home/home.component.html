@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-6">
+        <div class="text-center alert alert-heading h2" role="alert">Available Books</div>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Published</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <th scope="row"><span class="badge bg-primary rounded-pill">{{book.id}}</span></th>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author.name }}</td>
+                    <td>{{ book.published | date }}</td>
+                    <td>
+                        <a routerLink="/update-book/{{book.id}}" class="btn btn-sm btn-warning m-1">Edit</a>
+                        <a routerLink="/delete-book/{{book.id}}" class="btn btn-sm btn-danger m-1">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <div class="text-center alert alert-heading h2" role="alert">Available Authors</div>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let author of authors">
+                    <th scope="row"><span class="badge bg-primary rounded-pill">{{author.id}}</span></th>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.email }}</td>
+                    <td>
+                        <a routerLink="/update-author/{{author.id}}" class="btn btn-sm btn-warning m-1">Edit</a>
+                        <a routerLink="/delete-author/{{author.id}}" class="btn btn-sm btn-danger m-1">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="buttons">
+    <a routerLink="/add-new-book" class="btn btn-book">Add New Book</a>
+    <a routerLink="/add-new-author" class="btn btn-author">Add New Author</a>
+    <a routerLink="/logout" class="btn btn-danger">Logout</a>
+</div>

@@ -1,0 +1,19 @@
+<div class="centerd-content">
+    <div class="form login">
+        <p class="h1 text-center">Login Portal</p>
+        <hr>
+        <form #userlogin = "ngForm" (ngSubmit)="onSubmit(userlogin.value)" novalidate>
+            <div class="m-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" ngModel>
+            </div>
+            <div class="m-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" ngModel>
+            </div>
+            <div class="m-3">
+                <button type="submit" class="btn btn-sm btn-login">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

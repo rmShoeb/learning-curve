@@ -1,0 +1,20 @@
+<div class="centerd-content">
+    <div class="form">
+        <p class="h1 text-center">Add Author Info</p>
+        <hr>
+        <form #authorInfo = "ngForm" (ngSubmit)="onSubmit(authorInfo.value)" novalidate>
+            <div class="m-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" ngModel>
+            </div>
+            <div class="m-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" ngModel>
+            </div>
+            <div class="m-3">
+                <button type="submit" class="btn btn-sm btn-success">Save Author</button>
+            </div>
+        </form>
+    </div>
+</div>
+<button (click)="goBack()" class="btn btn-primary">Back</button>

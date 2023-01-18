@@ -24,12 +24,19 @@ public class BookService
     {
         return bookRepository.findById(id).get();
     }
+
     public void saveOrUpdate(Book book)
     {
         bookRepository.save(book);
     }
+
     public void delete(int id)
     {
         bookRepository.deleteById(id);
+    }
+
+    public void update(Book book, int id)
+    {
+        bookRepository.save(book);
     }
 }

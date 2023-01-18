@@ -1,0 +1,20 @@
+<div class="centerd-content">
+    <div class="form" *ngIf="author">
+        <p class="h1 text-center">Update Book Info</p>
+        <hr>
+        <form (ngSubmit)="onSubmit()" novalidate>
+            <div class="m-3">
+                <label for="name" class="form-label">Name</label>
+                <input [(ngModel)]="author.name" name="name" type="text" class="form-control" id="name">
+            </div>
+            <div class="m-3">
+                <label for="email" class="form-label">Email</label>
+                <input [(ngModel)]="author.email" name="email" type="email" class="form-control" id="email">
+            </div>
+            <div class="m-3">
+                <button type="submit" class="btn btn-sm btn-success">Update Author</button>
+            </div>
+        </form>
+    </div>
+</div>
+<button (click)="goBack()" class="btn btn-primary">Back</button>

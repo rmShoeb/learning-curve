@@ -24,6 +24,7 @@ public class SpringBootRestApplication {
                         .allowedOriginPatterns(CorsConfiguration.ALL)
                         .allowedMethods(CorsConfiguration.ALL)
                         .allowedHeaders(CorsConfiguration.ALL);
+                //                        .allowedOrigins("http://127.0.0.1:5500")
             }
         };
     }

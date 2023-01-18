@@ -1,0 +1,27 @@
+<div class="centerd-content">
+    <div class="form" *ngIf="book">
+        <p class="h1 text-center">Update Book Info</p>
+        <hr>
+        <form #updateBookForm="ngForm" (ngSubmit)="onSubmit(updateBookForm.value)" novalidate>
+            <div class="m-3">
+                <label for="title" class="form-label">Book Title</label>
+                <input [(ngModel)]="book.title" name="title" type="text" class="form-control" id="title">
+            </div>
+            <div class="m-3">
+                <label for="author" class="form-label">Author</label>
+                <select [(ngModel)]="book.author.id" class="form-select" name="author" id="author">
+                    <option *ngFor="let author of authors" [ngValue]="author.id">{{author.name}}</option>
+                </select>
+            </div>
+            <div class="m-3">
+                <label for="published" class="form-label">Published</label>
+                <input [ngModel]="book.published | date:'yyyy-MM-dd'" (ngModelChange)="book.published = $event"
+                    name="published" type="date" class="form-control" id="published">
+            </div>
+            <div class="m-3">
+                <button type="submit" class="btn btn-sm btn-success">Update Book</button>
+            </div>
+        </form>
+    </div>
+</div>
+<button (click)="goBack()" class="btn btn-primary">Back</button>
