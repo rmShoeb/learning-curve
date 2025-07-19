@@ -1,0 +1,15 @@
+.buttons{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.alert-heading {
+    color: #055160;
+    background: linear-gradient(90deg, #e4e4e4, #85b6b1);
+}
+.btn-book {
+    background: linear-gradient(45deg, #595cff, #c6f8ff);
+}
+.btn-author {
+    background: linear-gradient(135deg, #00ecbc, #007adf);
+}
