@@ -420,7 +420,7 @@ The role of the global handler `window.onerror` is usually not to recover the sc
 ---
 
 # Browser Interaction
-![Browser Interaction](images\browser-interaction.png)
+![Browser Interaction](images/browser-interaction.png)
 
 ## Document Object Model
 Or DOM for short, represents all page content as objects that can be modified. The document object is the main “entry point” to the page. [DOM living standard](https://dom.spec.whatwg.org/)
