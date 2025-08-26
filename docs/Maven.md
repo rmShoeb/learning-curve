@@ -6,12 +6,22 @@
 - It simplifies the day-to-day work of Java developers and aids in the comprehension of any Java-based project.
 - It takes care of Builds, Dependencies, Reports, Distribution, Releases, Mailing list, Documentation, SCMs.
 - Can also be used to create and manage projects written in other languages such as C#, Ruby, Scala.
+- Use variations of Maven (e.g. Polyglot Maven), or Maven Plugins to use other languages than JAVA.
 
 ## Objectives
 - Making the build process easy
 - Providing a uniform build system
 - Providing quality project information
 - Encouraging better development practices
+- While using Maven doesn't eliminate the need to know about the underlying mechanisms, Maven does shield developers from many details.
+- Maven builds a project using its project object model (POM) and a set of plugins. Once you familiarize yourself with one Maven project, you know how all Maven projects build. This saves time when navigating many projects.
+- Maven provides useful project information that is in part taken from your POM and in part generated from your project's sources. For example, Maven can provide:
+	- Change log created directly from source control
+	- Cross referenced sources
+	- Mailing lists managed by the project
+	- Dependencies used by the project
+	- Unit test reports including coverage
+- Third party code analysis products also provide Maven plugins that add their reports to the standard information given by Maven.
 
 # Installation
 
@@ -24,6 +34,20 @@
 - `maven.config` is used to specify command-line options for Maven at the project level. This allows to configure global options that should apply whenever Maven commands are run within the project.
 - `jvm.config` lets define JVM configuration, *i.e.* define the options for the build on a per project base.
 - `extensions.xml` is used to configure Maven core extensions. These extensions are automatically included when anyone builds the project.
+
+
+## `.mvn/extensions.xml` file
+Previously, it was very painful to change maven installation, or extend it. This file helps to do this easily.
+
+## `.mvn/maven.config` file
+It was really hard to define a general set of options for calling the maven command line. This file makes it easier on a per-project basis.
+
+## `.mvn/jvm.config` file
+For example if we put the following JVM options into the `.mvn/jvm.config` file
+```
+-Xmx2048m -Xms1024m -XX:MaxPermSize=512m -Djava.awt.headless=true
+```
+we don't need to use these options in `MAVEN_OPTS` or switch between different configurations.
 
 # Architecture
 - Maven’s architecture revolves around the concept of Project Object Model (POM), which serves as the blueprint for managing the build process.
@@ -73,8 +97,8 @@
 #### User Properties
 - Refer to settings specific to the user running Maven, typically defined in the settings.xml file.
 - Example:
-    - `$user.home`
-    - `$user.name`
+    - `$user.home` -> The user's home directory
+    - `$user.name` -> The user's login name
 
 #### Environment Properties
 - Allow access to environment variables defined in the operating system.
@@ -226,6 +250,9 @@
     </exclusions>
 </dependency>
 ```
+
+**Why exclusions are made on a per-dependency basis, rather than at the POM level?**
+This is mainly to be sure the dependency graph is predictable, and to keep inheritance effects from excluding a dependency that should not be excluded. If you get to the method of last resort and have to put in an exclusion, you should be absolutely certain which of your dependencies is bringing in that unwanted transitive dependency. If you truly want to ensure that a particular dependency appears nowhere in your classpath, regardless of path, the banned dependencies rule can be configured to fail the build if a problematic dependency is found. When the build fails, you'll need to add specific exclusions on each path the enforcer finds.
 
 ## Repositories
 - Refer to the directories of packaged JAR files that contain metadata.
