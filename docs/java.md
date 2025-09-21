@@ -1684,3 +1684,4 @@ file.delete(); // true if the file is deleted, false if the file does not exist.
 # Resources
 1. https://www.programiz.com/java-programming
 2. https://docs.oracle.com/javase/specs/jls/se20/html/index.html
+3. [Core Java frequently asked Interview Questions and Answers](https://youtube.com/playlist?list=PLyHJZXNdCXscoyL5XEZoHHZ86_6h3GWE1&si=442zRiYZNPX4t88P)

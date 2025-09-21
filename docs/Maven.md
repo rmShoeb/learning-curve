@@ -638,3 +638,10 @@ defaultTasks 'build'
 - Maven has been widely adopted in the Java ecosystem for many years. It offers stability, extensive documentation, and a large community of users and plugins.
 - Maven integrates well with Continuous Integration (CI) and Continuous Delivery (CD) pipelines, such as Jenkins, GitLab CI, and others. Many CI/CD tools have built-in support for Maven, making it easier to automate builds, tests, and deployments.
 - Maven is particularly well-suited for Java projects or projects that primarily use JVM-based languages (like Kotlin or Scala). It provides built-in support for compiling Java code, running tests, packaging artifacts, and managing project dependencies.
+
+---
+
+# Resources
+- [Maven](https://youtube.com/playlist?list=PL92E89440B7BFD0F6&si=LcJvpRb_K84vmLae)
+- [Maven Tutorial for Beginners](https://youtube.com/playlist?list=PLS1QulWo1RIaaQ3mAU9Nj4rqfwbAv3wIZ&si=aJExksxvMWfsThM-)
+- [Maven Tutorial for Beginners (New Course)](https://youtube.com/playlist?list=PLS1QulWo1RIaLGvbwZCKPQBSy6I3Slamr&si=RN98cW1gKvkoTC23)

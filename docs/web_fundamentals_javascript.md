@@ -434,5 +434,6 @@ It represents additional objects provided by the browser (host environment) for 
 ---
 
 # Resources
-* [The Modern JavaScript Tutorial](https://javascript.info/)
-* [JavaScript data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
+- [The Modern JavaScript Tutorial](https://javascript.info/)
+- [JavaScript data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
+- [JavaScript Tutorials](https://youtube.com/playlist?list=PL-osiE80TeTucQUM10Ezv4S7SVoFozLMK&si=irfY2mZXlzt5T1ge)
