@@ -9,14 +9,14 @@ Welcome to the learning resources documentation. This section contains detailed 
 ## Database Systems
 
 ### RDBMS Fundamentals
-- [Basic RDBMS Concepts](./RDBMS.md)
+- [Basic RDBMS Concepts](./RDBMS)
   - Database Design
   - Normalization
   - SQL Fundamentals
   - Query Optimization
 
 ### Advanced RDBMS Topics
-- [Advanced Database Concepts](./RDBMS_advanced.md)
+- [Advanced Database Concepts](./RDBMS_advanced)
   - Subqueries and Complex Queries
   - Common Table Expressions (CTEs)
   - SET Operations
@@ -27,14 +27,14 @@ Welcome to the learning resources documentation. This section contains detailed 
 ## Machine Learning
 
 ### Core Concepts
-- [Machine Learning Basics](./ML_basics.md)
+- [Machine Learning Basics](./ML_basics)
   - Model Selection
   - Feature Engineering
   - Model Evaluation
   - Cross Validation
 
 ### Deep Learning
-- [Deep Learning Topics](./DL_topics.md)
+- [Deep Learning Topics](./DL_topics)
   - Neural Networks
   - TensorFlow
   - Graph Neural Networks
@@ -43,21 +43,21 @@ Welcome to the learning resources documentation. This section contains detailed 
 ## Programming Languages
 
 ### Python
-- [Python Programming](./Python.md)
+- [Python Programming](./Python)
   - OS Module Usage
   - Regular Expressions
   - Image Processing
   - Desktop Applications
 
 ### Java
-- [Java Development](./Java.md)
+- [Java Development](./Java)
   - Core Java Features
   - File Handling
   - GUI Development
   - Event Handling
 
 ### C++
-- [C++ Programming](./Cpp.md)
+- [C++ Programming](./Cpp)
   - STL Usage
   - Memory Management
   - Templates
@@ -66,14 +66,14 @@ Welcome to the learning resources documentation. This section contains detailed 
 ## Web Development
 
 ### Frontend
-- [Web Frontend](./Frontend.md)
+- [Web Frontend](./Frontend)
   - HTML/CSS
   - JavaScript
   - AngularJS
   - DOM Manipulation
 
 ### Backend
-- [Web Backend](./Backend.md)
+- [Web Backend](./Backend)
   - Spring Framework
   - Flask
   - PHP
@@ -82,7 +82,7 @@ Welcome to the learning resources documentation. This section contains detailed 
 ## Document Preparation
 
 ### LaTeX
-- [LaTeX Guide](./LaTeX.md)
+- [LaTeX Guide](./LaTeX)
   - Document Classes
   - Beamer Presentations
   - PDF Generation
