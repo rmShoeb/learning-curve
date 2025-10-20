@@ -6,87 +6,46 @@ title: Learning Resources Index
 # Learning Resources
 Welcome to the learning resources documentation. This section contains detailed guides and references for various technologies and programming concepts I have been learning.
 
-## Database Systems
-
-### RDBMS Fundamentals
-- [Basic RDBMS Concepts](./RDBMS)
-  - Database Design
-  - Normalization
-  - SQL Fundamentals
-  - Query Optimization
-
-### Advanced RDBMS Topics
-- [Advanced Database Concepts](./RDBMS_advanced)
-  - Subqueries and Complex Queries
-  - Common Table Expressions (CTEs)
-  - SET Operations
-  - JSON Data Handling
-  - Transactions and ACID Properties
-  - Partitioning and Sharding
-
-## Machine Learning
-
-### Core Concepts
-- [Machine Learning Basics](./ML_basics)
-  - Model Selection
-  - Feature Engineering
-  - Model Evaluation
-  - Cross Validation
-
-### Deep Learning
-- [Deep Learning Topics](./DL_topics)
-  - Neural Networks
-  - TensorFlow
-  - Graph Neural Networks
-  - Transformer Models
-
 ## Programming Languages
-
-### Python
-- [Python Programming](./Python)
-  - OS Module Usage
-  - Regular Expressions
-  - Image Processing
-  - Desktop Applications
-
-### Java
-- [Java Development](./Java)
-  - Core Java Features
-  - File Handling
-  - GUI Development
-  - Event Handling
-
-### C++
-- [C++ Programming](./Cpp)
-  - STL Usage
-  - Memory Management
-  - Templates
-  - Object-Oriented Features
+- Python
+- Java
+    - [Core Java](./java)
+    - [Advanced Java](./Advanced_Java_Topics)
+    - [Maven](./Maven)
+    - [Hibernate Session Management](./Hibernate_Session_Management)
+- [C++](./C++)
+- [C#](./C#)
 
 ## Web Development
+- Frontend
+    - HTML/CSS
+    - [JavaScript](./web_fundamentals_javascript)
+    - [TypeScript](./typescript)
+    - [AngularJs](./web_fundamentals_angularJS)
+    - [Angular](./Angular)
+    - [RxJs Observables](./RxJs_Observables)
+- Backend
+    - [Spring Framework](./Spring_Framework)
+    - [Spring Transaction Management](./Spring_Transaction_Management)
+    - Flask
+    - [FastAPI](./fast-api)
+- Tools
+    - [NPM](./npm)
 
-### Frontend
-- [Web Frontend](./Frontend)
-  - HTML/CSS
-  - JavaScript
-  - AngularJS
-  - DOM Manipulation
+## Database Systems
+- [RDBMS Fundamentals](./RDBMS_basic)
+- [Advanced Relational Database Concepts](./RDBMS_advanced)
+- [Relational Database Performance](./RDBMS_performance)
+- [SQL Server](./MS_SQL_Server)
+- [MySQL](./MySQL)
 
-### Backend
-- [Web Backend](./Backend)
-  - Spring Framework
-  - Flask
-  - PHP
-  - Servlets/JSP
-
+## Machine Learning
 ## Document Preparation
 
-### LaTeX
-- [LaTeX Guide](./LaTeX)
-  - Document Classes
-  - Beamer Presentations
-  - PDF Generation
-  - Mathematical Typesetting
+## Others
+- [Git](./git)
+- [Design Patterns and Principles](./design_patterns_and_principles)
+- [System Design](./System_Design)
 
 ---
 
