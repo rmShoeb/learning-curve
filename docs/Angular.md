@@ -217,12 +217,14 @@ export class NameEditorComponent {
 }
 ```
 
+{% raw %}
 ```html
 <label for="name">Name: </label>
 <input id="name" type="text" [formControl]="name">
 <p>Value: {{ name.value }}</p>
 <button type="button" (click)="updateName()">Update Name</button>
 ```
+{% endraw %}
 
 ### Grouping Form Controls
 #### Form Group

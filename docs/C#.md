@@ -115,6 +115,7 @@ Pretty much the same as C/C++. But, C# uses the `+` operator for both addition a
 ---
 
 # Others
+{% raw %}
 ```c#
 // Shorthand if-else
 variable = (condition) ? expressionTrue : expressionFalse;
@@ -269,6 +270,7 @@ cities["France"] = "Paris"; //throws run-time exception: KeyNotFoundException
 cities.Remove("UK"); // removes UK
 cities.Remove("France"); //throws run-time exception: KeyNotFoundException
 ```
+{% endraw %}
 
 ---
 
