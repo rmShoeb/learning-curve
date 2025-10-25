@@ -1,0 +1,72 @@
+.doc-viewer-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+}
+
+.doc-viewer {
+    width: 75%;
+    min-width: 0;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    padding: 2rem;
+    text-align: center;
+    color: var(--error-color);
+}
+
+.error h2 {
+    margin-bottom: 1rem;
+}
+
+.error a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.markdown-content {
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+/* Markdown content styles will be in global styles */
+
+@media (max-width: 1024px) {
+    .doc-viewer {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .doc-viewer {
+        padding: 1.5rem 1rem;
+    }
+}

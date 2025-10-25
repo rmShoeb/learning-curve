@@ -1,0 +1,17 @@
+<aside class="toc">
+    @if (tocItems().length > 0) {
+        <h3 class="toc-title">On This Page</h3>
+        <ul class="toc-list">
+            @for (item of tocItems(); track item.id) {
+                <li class="toc-item">
+                    <a [href]="'#' + item.id" (click)="scrollToHeading(item.id, $event)"
+                        [class]="'toc-link level-' + item.level" [class.active]="isActive(item.id)">
+                        {{ item.text }}
+                    </a>
+                </li>
+            }
+        </ul>
+    } @else {
+        <p class="toc-empty">No headings found</p>
+    }
+</aside>

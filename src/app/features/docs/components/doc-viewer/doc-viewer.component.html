@@ -1,0 +1,22 @@
+<div class="doc-viewer-container">
+    <div class="doc-viewer">
+        @if (loading()) {
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading documentation...</p>
+        </div>
+        } @else if (error()) {
+        <div class="error">
+            <h2>⚠️ Document Not Found</h2>
+            <p>{{ error() }}</p>
+        </div>
+        } @else {
+        <article class="markdown-content" [innerHTML]="content()" (click)="onMarkdownClick($event)"></article>
+        }
+        <a routerLink="/">← Back to Home</a>
+    </div>
+
+    @if (!loading() && !error()) {
+        <app-toc [content]="content()" />
+    }
+</div>

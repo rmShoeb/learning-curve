@@ -1,0 +1,359 @@
+[
+  {
+    "label": "Home",
+    "route": "/",
+    "icon": "home"
+  },
+  {
+    "label": "Database",
+    "icon": "folder",
+    "children": [
+      {
+        "label": "RDBMS",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "01 - Introduction to RDBMS",
+            "route": "/Database/RDBMS/intro"
+          },
+          {
+            "label": "02 - Core SQL Concepts",
+            "route": "/Database/RDBMS/core"
+          },
+          {
+            "label": "03 - Constraints",
+            "route": "/Database/RDBMS/constraints"
+          },
+          {
+            "label": "04 - Index",
+            "route": "/Database/RDBMS/indexes"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "MS SQL Server",
+        "route": "/Database/sql-server"
+      },
+      {
+        "label": "MySQL",
+        "route": "/Database/mysql"
+      }
+    ],
+    "expanded": false
+  },
+  {
+    "label": "Framework",
+    "icon": "folder",
+    "children": [
+      {
+        "label": "Angular",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "00 - Angular",
+            "route": "/Framework/Angular/intro"
+          },
+          {
+            "label": "02 - Basics of Application",
+            "route": "/Framework/Angular/basics"
+          },
+          {
+            "label": "03 - Form Handling and Validation",
+            "route": "/Framework/Angular/forms"
+          },
+          {
+            "label": "04 - Browser Storage",
+            "route": "/Framework/Angular/browser-storage"
+          },
+          {
+            "label": "05 - Basic Error Handling",
+            "route": "/Framework/Angular/error-handling"
+          },
+          {
+            "label": "06 - Routing",
+            "route": "/Framework/Angular/routing"
+          },
+          {
+            "label": "07 - Authentication",
+            "route": "/Framework/Angular/authentication"
+          },
+          {
+            "label": "08 - Authorization",
+            "route": "/Framework/Angular/authorization"
+          },
+          {
+            "label": "09 - Asynchronization",
+            "route": "/Framework/Angular/async"
+          },
+          {
+            "label": "91 - Framework Architecture Overview",
+            "route": "/Framework/Angular/architecture"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "Hibernate",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "00 - Introduction",
+            "route": "/Framework/Hibernate/intro"
+          },
+          {
+            "label": "01 - Session",
+            "route": "/Framework/Hibernate/session"
+          },
+          {
+            "label": "02 - Session Management Strategies",
+            "route": "/Framework/Hibernate/session-management"
+          },
+          {
+            "label": "03 - Key Operations with Hibernate Session",
+            "route": "/Framework/Hibernate/session-operations"
+          },
+          {
+            "label": "04 - Caching",
+            "route": "/Framework/Hibernate/caching"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "RxJS",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "00 - Introduction",
+            "route": "/Framework/RxJS/intro"
+          },
+          {
+            "label": "Observables",
+            "route": "/Framework/RxJS/observables"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "Spring Framework",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "01 - What is Spring Framework?",
+            "route": "/Framework/Spring Framework/intro"
+          },
+          {
+            "label": "02 - Bean",
+            "route": "/Framework/Spring Framework/bean"
+          },
+          {
+            "label": "03 - Inversion of Control?",
+            "route": "/Framework/Spring Framework/ioc"
+          },
+          {
+            "label": "04 - Configuration",
+            "route": "/Framework/Spring Framework/configuration"
+          },
+          {
+            "label": "04 - Core Annotations",
+            "route": "/Framework/Spring Framework/annotations"
+          },
+          {
+            "label": "05 - Spring Web MVC",
+            "route": "/Framework/Spring Framework/web-mvc"
+          },
+          {
+            "label": "06 - Basic Exception Handling",
+            "route": "/Framework/Spring Framework/exception-handling"
+          },
+          {
+            "label": "07 - Data Access",
+            "route": "/Framework/Spring Framework/data-access"
+          },
+          {
+            "label": "08 - Security & Authentication",
+            "route": "/Framework/Spring Framework/spring-security"
+          },
+          {
+            "label": "09 - Testing",
+            "route": "/Framework/Spring Framework/testing"
+          },
+          {
+            "label": "10 - Spring Boot",
+            "route": "/Framework/Spring Framework/spring-boot"
+          },
+          {
+            "label": "11 - Spring Transaction Management",
+            "route": "/Framework/Spring Framework/transaction-management"
+          },
+          {
+            "label": "Resources",
+            "route": "/Framework/Spring Framework/resources"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "`Mockito`",
+        "route": "/Framework/mockito"
+      },
+      {
+        "label": "AngularJS",
+        "route": "/Framework/angularjs"
+      },
+      {
+        "label": "FastAPI",
+        "route": "/Framework/fast-api"
+      },
+      {
+        "label": "JUnit",
+        "route": "/Framework/junit"
+      }
+    ],
+    "expanded": false
+  },
+  {
+    "label": "Others",
+    "icon": "folder",
+    "children": [
+      {
+        "label": "System Design",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "Introduction",
+            "route": "/Others/System Design/intro"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "Design Principles and Patterns",
+        "route": "/Others/design-principles-patterns"
+      },
+      {
+        "label": "REST API Conventions",
+        "route": "/Others/rest-api-conventions"
+      }
+    ],
+    "expanded": false
+  },
+  {
+    "label": "Programming Language",
+    "icon": "folder",
+    "children": [
+      {
+        "label": "Java",
+        "icon": "folder",
+        "children": [
+          {
+            "label": "00 - Introduction",
+            "route": "/Programming Language/Java/introduction"
+          },
+          {
+            "label": "01 - Object-Oriented Programming (OOP) with Java",
+            "route": "/Programming Language/Java/oop-concepts"
+          },
+          {
+            "label": "02 - Strings",
+            "route": "/Programming Language/Java/strings"
+          },
+          {
+            "label": "03 - Date/Time API",
+            "route": "/Programming Language/Java/date-time-api"
+          },
+          {
+            "label": "04 - Stream API",
+            "route": "/Programming Language/Java/stream-api"
+          },
+          {
+            "label": "05 - Generics",
+            "route": "/Programming Language/Java/generics"
+          },
+          {
+            "label": "06 - Collections Framework and Data Structures",
+            "route": "/Programming Language/Java/collections-framework"
+          },
+          {
+            "label": "07 - Lambda Expressions",
+            "route": "/Programming Language/Java/lambda-expression"
+          },
+          {
+            "label": "08 - Exception Handling",
+            "route": "/Programming Language/Java/exception-handling"
+          },
+          {
+            "label": "09 - Java I/O (Input/Output)",
+            "route": "/Programming Language/Java/io"
+          },
+          {
+            "label": "10 - Multithreading and Synchronization",
+            "route": "/Programming Language/Java/multithreading-and-synchronization"
+          },
+          {
+            "label": "11 - Java Virtual Machine (JVM)",
+            "route": "/Programming Language/Java/jvm"
+          },
+          {
+            "label": "12 - Memory Management and Garbage Collection",
+            "route": "/Programming Language/Java/memory-management-and-garbage-collection"
+          },
+          {
+            "label": "13 - Networking",
+            "route": "/Programming Language/Java/networking"
+          },
+          {
+            "label": "14 - Non-blocking I/O (NIO)",
+            "route": "/Programming Language/Java/nio"
+          },
+          {
+            "label": "15 - Servlets",
+            "route": "/Programming Language/Java/servlets"
+          },
+          {
+            "label": "16 - Java Server Pages (JSP)",
+            "route": "/Programming Language/Java/jsp"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "C#",
+        "route": "/Programming Language/charp"
+      },
+      {
+        "label": "C++",
+        "route": "/Programming Language/cpp"
+      },
+      {
+        "label": "JavaScript",
+        "route": "/Programming Language/javascript"
+      },
+      {
+        "label": "TypeScript",
+        "route": "/Programming Language/typescript"
+      }
+    ],
+    "expanded": false
+  },
+  {
+    "label": "Tools",
+    "icon": "folder",
+    "children": [
+      {
+        "label": "Git",
+        "route": "/Tools/git"
+      },
+      {
+        "label": "Maven",
+        "route": "/Tools/maven"
+      },
+      {
+        "label": "Node Package Manager",
+        "route": "/Tools/npm"
+      }
+    ],
+    "expanded": false
+  }
+]

@@ -1,0 +1,43 @@
+<aside class="sidebar">
+    <nav class="nav-tree">
+        @for (item of navigationService.navigation(); track trackByItem($index, item)) {
+        <div class="nav-item">
+            <ng-container *ngTemplateOutlet="navItemTemplate; context: { $implicit: item, level: 0 }"></ng-container>
+        </div>
+        }
+    </nav>
+</aside>
+
+<!-- Recursive navigation item template -->
+<ng-template #navItemTemplate let-item let-level="level">
+    @if (item.children) {
+    <!-- Parent item with children -->
+    <button class="nav-link nav-parent" [class.level]="'level-' + level" (click)="toggleItem(item)"
+        [class.expanded]="item.expanded" [class.has-active-child]="navigationService.hasActiveChild(item)">
+        @if (level === 0) {
+        <span class="nav-icon">{{ getIcon(item.icon) }}</span>
+        }
+        <span class="nav-label">{{ item.label }}</span>
+        <span class="chevron">›</span>
+    </button>
+
+    @if (item.expanded) {
+    <div class="nav-children">
+        @for (child of item.children; track trackByItem($index, child)) {
+        <!-- Recursively render child items -->
+        <ng-container
+            *ngTemplateOutlet="navItemTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
+        }
+    </div>
+    }
+    } @else {
+    <!-- Leaf item (no children) -->
+    <a [routerLink]="item.route" [class.active]="navigationService.isRouteActive(item.route)"
+        [class.level]="'level-' + level" class="nav-link nav-child" (click)="onLinkClick()">
+        @if (level === 0) {
+        <span class="nav-icon">{{ getIcon(item.icon) }}</span>
+        }
+        <span class="nav-label">{{ item.label }}</span>
+    </a>
+    }
+</ng-template>

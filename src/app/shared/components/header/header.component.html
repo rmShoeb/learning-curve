@@ -1,0 +1,22 @@
+<header class="header">
+    <div class="header-content">
+        <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+            <span class="hamburger-icon">☰</span>
+        </button>
+
+        <a routerLink="/" class="logo">
+            <span class="logo-icon">📚</span>
+            <span class="logo-text">Learning Curve</span>
+        </a>
+
+        <nav class="nav">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search docs..." [(ngModel)]="searchQuery"
+                    (keydown)="onSearchKeydown($event)" />
+                <button class="search-button" (click)="onSearch()">
+                    Search
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>

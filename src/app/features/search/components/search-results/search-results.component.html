@@ -1,0 +1,54 @@
+<div class="search-results-container">
+    @if (loading()) {
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Searching...</p>
+    </div>
+    } @else {
+    <div class="search-header">
+        <h1 class="search-title">
+            Search results for <span class="search-query">"{{ searchQuery() }}"</span>
+        </h1>
+        <p class="search-meta">Found {{ results().length }} {{ results().length === 1 ? 'result' : 'results' }}</p>
+    </div>
+
+    @if (results().length > 0) {
+    <div class="results-list">
+        @for (result of results(); track result.route) {
+        <a [routerLink]="result.route" class="result-item">
+            <div class="result-header">
+                <span class="result-icon">{{ getIcon(result.icon) }}</span>
+                <h2 class="result-title">{{ result.label }}</h2>
+            </div>
+            <p class="result-breadcrumb">{{ getBreadcrumb(result) }}</p>
+
+            @if (result.matchType === 'both' || result.matchType === 'content') {
+            <span class="result-match-type">
+                {{ result.matchType === 'both' ? 'Title + Content Match' : 'Content Match' }}
+            </span>
+            }
+
+            @if (result.contentMatches && result.contentMatches.length > 0) {
+            <div class="content-matches">
+                @for (match of result.contentMatches; track $index) {
+                <div class="content-match">
+                    <p class="content-snippet" [innerHTML]="match.highlightedSnippet"></p>
+                </div>
+                }
+            </div>
+            }
+        </a>
+        }
+    </div>
+    } @else {
+    <div class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h2 class="no-results-title">No results found</h2>
+        <p class="no-results-text">
+            We couldn't find any documents matching "{{ searchQuery() }}"
+        </p>
+        <a routerLink="/" class="back-link">← Back to Home</a>
+    </div>
+    }
+    }
+</div>

@@ -1,0 +1,62 @@
+* {box-sizing: border-box;}
+label {
+	display: inline-block;
+	width: 100px;
+}
+div.form-control {
+	margin: auto;
+	border: 5px solid black;
+	padding: 10px;
+	width: 768px;
+}
+div > h3 {text-align: center;}
+input[type=text], input[type=file] {
+	border-radius: 2px;
+	border: 2px solid #d5d8de;
+	width: 250px;
+	height: 40px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.text-right {text-align: right;}
+.container .text-right {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+.container {
+	grid-template-columns: 17% 11% 6% 33% 33%;
+	display: grid;
+	gap: 2px;
+}
+.container > div {
+	display: flex;
+	background-color: #fcd19f;
+	justify-content: center;
+	align-items: center;
+}
+.container > div.heading {
+	background-color: black;
+	color: white;
+	padding: 5px;
+}
+.image-container > img {
+	width: 250px;
+	object-fit: cover;
+	margin: 5px;
+}
+
+button {
+	border-radius: 2px;
+	border: 2px solid #d5d8de;
+	margin: 5px;
+	width: 75px;
+	height: 40px;
+	color: white;
+	cursor: pointer;
+}
+button.submit {background-color: #007E00;}
+button.reset {background-color: #d96518;}
+button.delete {background-color: #ed0e0e;}
+button.create-new {background-color: #760eed;width: auto;}

@@ -1,0 +1,17 @@
+-- CREATE SCHEMA stored_procedure;
+-- CREATE OR ALTER PROCEDURE stored_procedure.ProductList(
+--     @min_list_price AS DECIMAL
+-- ) AS
+-- BEGIN
+--     SELECT
+--         product_name,
+--         list_price
+--     FROM 
+--         production.products
+--     WHERE
+--         list_price >= @min_list_price
+--     ORDER BY
+--         list_price;
+-- END;
+EXECUTE stored_procedure.ProductList 125;
+-- DROP PROCEDURE IF EXISTS stored_procedure.ProductList;

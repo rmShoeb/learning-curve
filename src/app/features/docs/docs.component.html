@@ -1,0 +1,15 @@
+<div class="docs-layout">
+    <app-header (menuToggle)="toggleMobileMenu()" />
+
+    <div class="docs-container">
+        <app-sidebar class="docs-sidebar" [class.mobile-open]="isMobileMenuOpen()" (linkClick)="closeMobileMenu()" />
+
+        @if (isMobileMenuOpen()) {
+        <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
+        }
+
+        <main class="docs-content">
+            <router-outlet />
+        </main>
+    </div>
+</div>
