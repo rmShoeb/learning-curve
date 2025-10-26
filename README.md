@@ -244,7 +244,7 @@ Fast builds with the new application builder in `angular.json`:
 # Production build with optimizations
 npm run build:prod
 
-# Output will be in: dist/tip-devdocs/browser/
+# Output will be in: dist/learning-curve/browser/
 ```
 
 ## Configuration
