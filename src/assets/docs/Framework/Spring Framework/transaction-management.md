@@ -125,7 +125,7 @@ With these, any bean’s public method annotated with the `@Transactional` annot
 - When `@Transactional` is used on a bean, Spring initiates a transactional proxy of the service when instantiating the actual service.
 - This is done using proxy-through-subclassing with the help of the [Cglib library](https://github.com/cglib/cglib).
 
-![Proxy Transaction](images/proxy-transaction.png)
+![Proxy Transaction](/assets/images/proxy-transaction.png)
 
 Any other bean does not know of the actual service bean, but the proxy bean.
 

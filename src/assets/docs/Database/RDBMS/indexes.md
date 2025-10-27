@@ -255,8 +255,8 @@ SELECT * FROM customers ORDER BY customer_name;  -- Uses index for sorting
 - More indexes mean more work. The database engine has to maintain the indexes, which adds a small amount of overhead to its operations.
 - Takes up disk space. An index is a data structure that is stored on the disk, just like the table itself. The more indexes there are, and the larger the table, the more disk space it will consume.
 
-### When to Use an Index and When Not To
-**Create an Index On:**
+### When to
+**Create an Index:**
 - Primary Keys: The database usually does this by default.
 - Foreign Keys: Columns used to join tables are excellent candidates for indexes. It makes `JOIN` operations much faster.
 - Frequently Searched Columns: Any column that often appears in a `WHERE` clause (*e.g.*, `WHERE country_name = 'Canada'`).

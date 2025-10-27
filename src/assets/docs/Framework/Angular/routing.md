@@ -203,7 +203,7 @@ var state = {
 - A transition will either fully succeed, or fail entirely. (Atomicity)
 - Although transitions may take a long time to process, the current state remains unchanged until after the transition succeeds.
 
-![UI Router Transition](./angular-ui-router-transition.png)
+![UI Router Transition](/assets/images/angular-ui-router-transition.png)
 
 ## Resources
 - https://angular.dev/guide/routing

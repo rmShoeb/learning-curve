@@ -9,7 +9,7 @@
 - Tests are deeply reliant on manual change detection execution to run properly, and require more setup.
 - Good fit if form requirements are basic and logic that can be managed solely in the template.
 
-![Template Driven Form](angular-template-driven-form.png)
+![Template Driven Form](/assets/images/angular-template-driven-form.png)
 
 ## Reactive Forms
 - Provide direct, explicit access to the underlying form's object model.
@@ -19,7 +19,7 @@
 - Requires less setup for testing, and testing does not require deep understanding of change detection to properly test form updates and validation.
 - Suitable if forms are a key part of the application, or the application already using reactive patterns.
 
-![Reactive Form](angular-reactive-form.png)
+![Reactive Form](/assets/images/angular-reactive-form.png)
 
 ### Usage
 

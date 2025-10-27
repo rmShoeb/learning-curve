@@ -1,4 +1,4 @@
-# `Mockito`
+# Mockito
 - A mock object returns a dummy data and avoids external dependencies.
 - It simplifies the development of tests by mocking external dependencies and apply the mocks into the code under test.
 - This is useful when the real object is impractical to incorporate into a test.
