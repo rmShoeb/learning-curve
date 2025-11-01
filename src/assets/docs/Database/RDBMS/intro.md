@@ -65,16 +65,24 @@ CREATE TABLE Customers (
 
 ### Relationship Types
 
+![Entity relationship types](https://timweninger.com/wp-content/uploads/2021/08/image-27.png)
+
+**One-to-One:**
+
 ```sql
--- One-to-One: Customer to Customer Profile
+-- Customer to Customer Profile
 CREATE TABLE customer_profiles (
     customer_id INT PRIMARY KEY,
     preferences TEXT,
     loyalty_points INT,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
+```
 
--- One-to-Many: Customer to Orders
+**Many-to-One:**
+
+```sql
+-- Customer to Orders
 CREATE TABLE Orders (
     OrderID INTEGER PRIMARY KEY,
     OrderDate DATE NOT NULL,
@@ -82,8 +90,11 @@ CREATE TABLE Orders (
     customer_id INTEGER,
     FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
 );
+```
 
--- Many-to-many relationship through junction table
+**Many-to-Many**
+
+```sql
 CREATE TABLE product_suppliers (
     product_id INT,
     supplier_id INT,
