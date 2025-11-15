@@ -1,4 +1,4 @@
-# 11 - Conditional Logic
+# 09 - Conditional Logic
 
 ## `CASE`
 - The `CASE` expression goes through conditions and returns a value when the first condition is met.

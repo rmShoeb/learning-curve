@@ -1,4 +1,4 @@
-# 03 - Constraints
+# 04 - Constraints
 - In a database table, we can add rules to a column known as constraints.
 - These rules control the data that can be stored in a column.
 - The goal is to enforce data integrity and accuracy at the table level.

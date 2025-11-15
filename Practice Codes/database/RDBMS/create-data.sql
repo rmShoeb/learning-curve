@@ -1,6 +1,3 @@
--- Disabling foreign key checks during data insertion
-PRAGMA foreign_keys = OFF;
-
 -- Populate table: country (10 rows)
 INSERT INTO country (country_id, country_name, indep_year, continent) VALUES
 (1, 'United States', 1776, 'North America'),
@@ -87,7 +84,4 @@ INSERT INTO monarchs (id, monarch, country_id) VALUES
 (9, 'Charles III', 6),
 (10, 'Charles III', 7),
 (11, 'Charles III', 12);
-
--- Re-enabling foreign key checks
-PRAGMA foreign_keys = ON;
 

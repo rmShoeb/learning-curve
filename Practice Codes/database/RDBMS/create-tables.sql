@@ -1,7 +1,3 @@
--- SQLite
--- Disabling foreign key checks during table creation to avoid order issues
-PRAGMA foreign_keys = OFF;
-
 -- Table: country
 -- This table stores the basic information about each state/country.
 -- 'country_id' is the primary key that other tables will reference.
@@ -48,6 +44,3 @@ CREATE TABLE prime_minister_terms (
     PRIMARY KEY (pm_id, pm_start),
     FOREIGN KEY (pm_id) REFERENCES prime_ministers (pm_id)
 );
-
--- Re-enabling foreign key checks after tables are created
-PRAGMA foreign_keys = ON;

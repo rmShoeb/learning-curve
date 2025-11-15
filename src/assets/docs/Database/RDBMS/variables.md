@@ -1,4 +1,4 @@
-# 07 - Variables
+# 14 - Variables
 
 ## What is a Variable?
 - A named object that can store a specific type of data (`INT`, `VARCHAR`, `DATE`, *etc.*).

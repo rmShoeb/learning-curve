@@ -1,4 +1,4 @@
-# 06 - View
+# 13 - View
 
 ## What is a View?
 - In SQL, a view is a virtual table based on the result-set of an SQL statement.
