@@ -1,4 +1,4 @@
-# 20 - Index
+# 21 - Index
 - Indexing makes columns faster to query by creating pointers to where data is stored within a database.
 - It functions like a book's index, allowing the database to find rows quickly without scanning the entire table.
 - Instead of scanning every page (full table scan), we look up the term in the index and go directly to the correct page number (data row location).
