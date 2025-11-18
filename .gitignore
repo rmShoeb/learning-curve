@@ -39,3 +39,6 @@ Thumbs.db
 # Build artifacts
 *.log
 *.cache
+
+# files to ignore
+/src/assets/docs-navigation.json
