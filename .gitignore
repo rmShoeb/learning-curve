@@ -41,4 +41,3 @@ Thumbs.db
 *.cache
 
 # files to ignore
-/src/assets/docs-navigation.json
