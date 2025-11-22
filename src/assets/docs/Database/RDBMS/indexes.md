@@ -71,14 +71,6 @@
 - [Unique and non-unique indexes](https://www.ibm.com/docs/en/ias?topic=indexes-unique-non-unique)
 - [Differences between primary key or unique key constraints and unique indexes](https://www.ibm.com/docs/en/ias?topic=indexes-unique-non-unique#d22242e85)
 
-### Multicolumn Indexes
-- An index that includes more than one column, and can store data on up to 32 columns.
-- It's very useful for queries that filter on multiple columns in the `WHERE` clause.
-- Standard indexes on a column can lead to substantial decreases in query execution times. However, Multi-column indexes can achieve even greater decreases in query time due to its ability to move through the data quicker.
-
-**Reading**
-- [Multicolumn Indexes](https://www.atlassian.com/data/sql/multicolumn-indexes)
-
 ## Index Management
 
 ### Creating Index
@@ -188,42 +180,148 @@ DROP INDEX idx_presidents_country_id ON presidents; -- Need to specify table nam
 DROP INDEX IDX_PRESIDENTS_COUNTRY_ID; -- No need to specify table name
 ```
 
-## Performance
+### Maintenance
+- SQL indexes are one of the greatest resources when it comes to performance gain. However, they degrade over time.
+- It is easy to optimize a single query, but in the real world, we got thousands of different queries hitting our databases.
+- It is close to impossible to analyze and optimize each of those individually.
 
-### Execution Plan Analysis
-- It is the process of examining the step-by-step "roadmap" that the database's Query Optimizer creates to retrieve the data for a query.
-- By analyzing this plan, we can verify whether the database is using our indexes efficiently, or if it's resorting to slow, brute-force methods.
+#### Fragmentation
+- We want to store data contiguous (in sequence) so that it is less work for system to find it.
+- If the data is stored non-contiguously, that is Fragmentation, and the system has to jump around to get the data it is looking for.
+- Internal
+    - This type of fragmentation happens when new data comes in and there is no space for it. 
+    - System has to create a new index page, and move some data from the old index page.
+    - Now both index page has some empty space.
+- External
 
-**The Goal of Index-Focused Analysis**
-- Is my index being used? The most basic question. Did the database choose to take the highway?
-- HOW is my index being used? Is it being used in the most efficient way possible?
-- Are there any "bottlenecks"? Can I spot an operation that is taking up 90% of the query's total cost?
-- Is the database telling me it needs an index? Modern query optimizers are smart enough to suggest missing indexes right in the execution plan.
+This is what 0% fragmentation looks like:
+![no-fragmentation](https://www.sqlshack.com/wp-content/uploads/2019/01/table1.png)
 
-**To View an Execution Plan**
+This is what data with fragmentation looks like:
+![fragmentation](https://www.sqlshack.com/wp-content/uploads/2019/01/table2.png)
+
+When new data is inserted, it looks like this:
+![](https://www.sqlshack.com/wp-content/uploads/2019/01/table3.png)
+
+#### Solving Fragmentation
+**Rebuild**
+- This creates a brand new SQL index.
+- It is cleaner, easier and usually much quicker on a large database.
+- However, it can take up a lot of resources while processing.
+- If the operation is canceled, the whole process reverts back (like a transaction).
 
 ```sql
 -- SQL Server
-SET STATISTICS XML ON;
-GO
+ALTER INDEX IX_PM_Name ON prime_ministers REBUILD;
+-- Oracle
+ALTER INDEX IX_PM_Name REBUILD;
+```
 
-SELECT p.president, c.country_name, c.continent
-FROM presidents p
-JOIN country c ON p.country_id = c.country_id
-WHERE c.continent = 'Europe';
-GO
+**Reorganize**
+- This fixes physical order and compact pages.
+- It is better for concurrency.
+- If the operation is canceled, the work done until cancelation is not lost.
 
-SET STATISTICS XML OFF;
-GO
+```sql
+-- SQL Server
+ALTER INDEX IX_PM_Name ON prime_ministers REORGANIZE;
+-- Oracle
+ALTER INDEX IX_PM_Name COALESCE;
+```
+
+#### Checking Fragmentation
+
+```sql
+-- SQL Server
+SELECT OBJECT_NAME(ix.object_ID) AS TableName, 
+       ix.name AS IndexName, 
+       ixs.index_type_desc AS IndexType, 
+       ixs.avg_fragmentation_in_percent
+FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, NULL) ixs
+     INNER JOIN sys.indexes ix ON ix.object_id = ixs.object_id
+                                  AND ixs.index_id = ixs.index_id
+WHERE ixs.avg_fragmentation_in_percent > 30
+ORDER BY ixs.avg_fragmentation_in_percent DESC;
+```
+
+#### Unused Indexes
+
+```sql
+SELECT OBJECT_NAME(ix.object_ID) AS TableName, 
+       ix.name AS IndexName, 
+       ixs.user_seeks, 
+       ixs.user_scans, 
+       ixs.user_lookups, 
+       ixs.user_updates
+FROM sys.dm_db_index_usage_stats ixs
+     INNER JOIN sys.indexes ix ON ix.object_id = ixs.object_id
+                                  AND ixs.index_id = ixs.index_id
+WHERE OBJECTPROPERTY(ixs.object_id, 'IsUserTable')  = 1
+      AND ixs.database_id = DB_ID();
+```
+
+#### Updating Statistics
+- Statistics is a metadata that tells the database engine what the data looks like.
+- If the stats are outdated (stale), DB engine may not pick up index information.
+- While most modern database engines update statistics automatically, we can update them manually too.
+
+```sql
+-- SQL Server
+UPDATE STATISTICS prime_ministers;
 
 -- Oracle
-EXPLAIN PLAN FOR
-SELECT customer_name 
-FROM customers 
-WHERE email = 'john@example.com';
-
-SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+EXEC DBMS_STATS.GATHER_TABLE_STATS('USER', 'PRIME_MINISTERS');
 ```
+
+#### Reading
+- [SQL index maintenance](http://sqlshack.com/sql-index-maintenance/)
+
+## Index Design Strategies
+- Designing efficient indexes is key to achieving good database and application performance.
+- A lack of indexes, over-indexing, or poorly designed indexes are top sources of database performance problems.
+
+### Multicolumn Indexes
+- An index that includes more than one column, and can store data on up to 32 columns.
+- It's very useful for queries that filter on multiple columns in the `WHERE` clause.
+- Standard indexes on a column can lead to substantial decreases in query execution times. However, Multi-column indexes can achieve even greater decreases in query time due to its ability to move through the data quicker.
+
+**Reading**
+- [Multicolumn Indexes](https://www.atlassian.com/data/sql/multicolumn-indexes)
+
+### Covering Indexes
+- Normally, if an index doesn't have all the data a query needs, the database uses the index to find the row, then jumps back to the main table (a "Key Lookup") to fetch the rest of the data. This jump is expensive.
+- A Covering Index contains every single column requested by the query.
+
+```sql
+-- SQL Server
+CREATE NONCLUSTERED INDEX IX_PM_Name
+ON prime_ministers (pm_id) -- Sorted by ID
+INCLUDE (pm_name);         -- "Tags along" for the ride
+```
+
+- However, Oracle does not support this, and all the corresponding columnns need to be included in the index.
+
+### Filtered Indexes
+- Sometimes we may have thousands of rows, but most of the time, we may query 5% or 10% of the data.
+- A filtered index has a `WHERE` clause.
+- It is smaller, faster to update, and faster to query.
+
+```sql
+-- SQL Server
+CREATE NONCLUSTERED INDEX IX_IndepYear_Nulls
+ON country (country_name)
+WHERE indep_year IS NULL; -- Only indexes the NULL rows (like UK)
+
+-- Oracle (Function-based approach for similar effect)
+CREATE INDEX IX_IndepYear_Nulls
+ON country (CASE WHEN indep_year IS NULL THEN country_name END);
+```
+
+### Selectivity
+- The strategy is to choose columns with high uniqueness.
+- **High Selectivity (Good):** SSN, Email, ID. This type of columns can be indexed as each index would return 1 row.
+- **Low Selectivity (Bad):** Gender, IsActive. This type of columns should not be indexed as each index would return 50% of the table.
+- If an index returns 20% or more of the table, the database engine will often ignore the index entirely and just scan the whole table because it's faster than jumping back and forth.
 
 ### Index Performance Scenarios
 
@@ -243,6 +341,13 @@ SELECT * FROM orders WHERE status = 'SHIPPED';  -- Uses only last column
 CREATE INDEX idx_customers_name ON customers (customer_name);
 SELECT * FROM customers ORDER BY customer_name;  -- Uses index for sorting
 ```
+
+### Resources
+- [Index architecture and design guide](https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-index-design-guide?view=sql-server-ver17)
+- [Database Indexing Strategies](https://blog.bytebytego.com/p/database-indexing-strategies)
+- [Indexing Strategies](https://www.alooba.com/skills/concepts/database-and-storage-systems/database-management/indexing-strategies/)
+- [System design concepts: Practical Indexing Strategies for Real-World Systems](https://scalabrix.medium.com/system-design-concepts-practical-indexing-strategies-for-real-world-systems-40b9ae5cd7fb)
+- [You're designing a database indexing strategy. What's the most important thing to consider?](https://www.linkedin.com/advice/0/youre-designing-database-indexing-strategy-gjzwf)
 
 ## The Trade-off
 
