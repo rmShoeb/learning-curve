@@ -61,6 +61,11 @@
                     },
                     "configurations": {
                         "production": {
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "baseHref": "/learning-curve/",
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -73,32 +78,23 @@
                                     "maximumError": "8kB"
                                 }
                             ],
-                            "outputHashing": "all",
-                            "optimization": true,
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "baseHref": "/learning-curve/"
-                        },
-                        "gitlab": {
-                            "budgets": [
+                            "optimization": {
+                                "scripts": true,
+                                "styles": true,
+                                "fonts": true
+                            },
+                            "define": {
+                                "console.log": "function(){}",
+                                "console.debug": "function(){}",
+                                "console.info": "function(){}",
+                                "console.warn": "function(){}"
+                            },
+                            "fileReplacements": [
                                 {
-                                    "type": "initial",
-                                    "maximumWarning": "500kB",
-                                    "maximumError": "1MB"
-                                },
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "4kB",
-                                    "maximumError": "8kB"
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
                                 }
-                            ],
-                            "outputHashing": "all",
-                            "optimization": true,
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "baseHref": "/YOUR-PROJECT-NAME/"
+                            ]
                         },
                         "development": {
                             "optimization": false,
