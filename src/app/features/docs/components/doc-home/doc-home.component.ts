@@ -28,7 +28,7 @@ export class DocHomeComponent {
                 text: "Programming Languages",
                 children: [
                     { routerLink: '/Programming Language/csharp', text: 'C#' },
-                    { routerLink: '/Programming Language/cpp', text: 'C++' },
+                    { routerLink: '/Programming Language/CPP/intro', text: 'C++' },
                     { routerLink: '/Programming Language/Java/introduction', text: 'Java' },
                     { routerLink: '/Programming Language/javascript', text: 'JavaScript' },
                     { routerLink: '/Programming Language/typescript', text: 'TypeScript' },
