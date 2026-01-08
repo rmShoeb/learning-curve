@@ -1,1 +1,1 @@
-# 00 - Introduction
+# Introduction

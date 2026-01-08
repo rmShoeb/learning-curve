@@ -16,17 +16,17 @@ const OUTPUT_FILE = path.join(__dirname, '../src/assets/docs-navigation.json');
 
 // Icon mapping for categories
 const ICON_MAP = {
-    'getting-started': 'rocket',
+    'Getting Started': 'rocket',
     'architecture': 'architecture',
     'development': 'code',
-    'api': 'api',
-    'database': 'database',
+    'API': 'api',
+    'Database': 'database',
     'deployment': 'rocket',
-    'tools': 'tools',
+    'Tools': 'tools',
     'operations': 'tools',
-    'security': 'security',
+    'Security': 'security',
     'modules': 'code',
-    'reference': 'database'
+    'Reference': 'database'
 };
 
 /**
@@ -53,7 +53,7 @@ function extractTitle(filePath) {
             return match[1].trim();
         }
     } catch (error) {
-        console.warn(`Warning: Could not read file ${filePath}`);
+        console.warn(`[WARNING] Could not read file ${filePath}`);
     }
     return null;
 }
@@ -127,7 +127,7 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
         const directories = entries.filter(e => e.isDirectory() && !shouldExclude(e.name));
 
         if (depth < 5) { // Only log first 5 levels to avoid spam
-            console.log(`${indent}📁 Scanning: ${path.relative(baseDir, dir) || '/'} (${files.length} files, ${directories.length} folders)`);
+            console.log(`[INFO]${indent} Scanning: ${path.relative(baseDir, dir) || '/'} (${files.length} files, ${directories.length} folders)`);
         }
 
         // Process files first
@@ -140,11 +140,11 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
             // Check for problematic characters
             const fileCheck = hasProblematicCharacters(file.name);
             if (fileCheck.hasIssue) {
-                console.warn(`${indent}  ⚠️  ${file.name} - ${fileCheck.message}`);
-                console.warn(`${indent}      This file may not load properly in the browser.`);
-                console.warn(`${indent}      Consider renaming to avoid: ${fileCheck.chars.join(', ')}`);
+                console.warn(`[WARNING]${indent} ${file.name} - ${fileCheck.message}`);
+                console.warn(`${indent} This file may not load properly in the browser.`);
+                console.warn(`${indent} Consider renaming to avoid: ${fileCheck.chars.join(', ')}`);
             } else if (depth < 5) {
-                console.log(`${indent}  📄 ${file.name} -> ${route}`);
+                console.log(`[INFO]${indent} ${file.name} -> ${route}`);
             }
 
             items.push({
@@ -156,7 +156,6 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
         // Process directories RECURSIVELY
         for (const directory of directories) {
             const fullPath = path.join(dir, directory.name);
-            const relativePath = path.relative(baseDir, fullPath);
 
             // IMPORTANT: Recursively scan subdirectory with increased depth
             const children = scanDirectory(fullPath, baseDir, depth + 1);
@@ -171,7 +170,7 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
                 };
 
                 if (depth < 5) {
-                    console.log(`${indent}  📂 ${folderName}/ (${children.length} children)`);
+                    console.log(`[INFO]${indent} ${folderName}/ (${children.length} children)`);
                 }
 
                 items.push(item);
@@ -186,11 +185,15 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
             if (aIsFolder && !bIsFolder) return -1;
             if (!aIsFolder && bIsFolder) return 1;
 
-            return a.label.localeCompare(b.label);
+            if(a.route === undefined || a.route === null) {
+                return a.label.localeCompare(b.label);
+            }
+
+            return a.route.localeCompare(b.route);
         });
 
     } catch (error) {
-        console.error(`Error scanning directory ${dir}:`, error.message);
+        console.error(`[ERROR] Error scanning directory ${dir}:`, error.message);
     }
 
     return items;
@@ -200,11 +203,11 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
  * Generate the complete navigation structure
  */
 function generateNavigation() {
-    console.log('🔍 Scanning documentation files...');
-    console.log(`   Source: ${DOCS_DIR}`);
+    console.log('[INFO] Scanning documentation files...');
+    console.log(`       Source: ${DOCS_DIR}`);
 
     if (!fs.existsSync(DOCS_DIR)) {
-        console.error(`❌ Error: Documentation directory not found: ${DOCS_DIR}`);
+        console.error(`[ERROR] Documentation directory not found: ${DOCS_DIR}`);
         process.exit(1);
     }
 
@@ -221,7 +224,7 @@ function generateNavigation() {
     const docItems = scanDirectory(DOCS_DIR);
     navigation.push(...docItems);
 
-    console.log(`✅ Found ${docItems.length} documentation categories/files`);
+    console.log(`[INFO] Found ${docItems.length} documentation categories/files`);
 
     return navigation;
 }
@@ -264,15 +267,15 @@ function writeNavigationFile(navigation) {
     const json = JSON.stringify(navigation, null, 2);
     fs.writeFileSync(OUTPUT_FILE, json, 'utf-8');
 
-    console.log(`📝 Navigation file generated: ${OUTPUT_FILE}`);
-    console.log(`   Total items: ${navigation.length}`);
+    console.log(`[INFO] Navigation file generated: ${OUTPUT_FILE}`);
+    console.log(`[INFO] Total items: ${navigation.length}`);
 }
 
 /**
  * Main execution
  */
 function main() {
-    console.log('🚀 Generating documentation navigation...\n');
+    console.log('[INFO] Generating documentation navigation...\n');
 
     try {
         const navigation = generateNavigation();
@@ -281,7 +284,7 @@ function main() {
         // Check for problematic filenames
         const issues = checkAllFiles(DOCS_DIR);
         if (issues.length > 0) {
-            console.log('\n⚠️  WARNING: Found files with problematic characters:');
+            console.log('[WARNING] Found files with problematic characters:');
             issues.forEach(issue => {
                 console.log(`   - ${issue.file} (contains: ${issue.chars.join(', ')})`);
             });
@@ -289,10 +292,10 @@ function main() {
             console.log('   Recommendation: Rename files to avoid # and % characters.\n');
         }
 
-        console.log('\n✨ Navigation generation complete!\n');
+        console.log('[INFO] Navigation generation complete!\n');
         process.exit(0);
     } catch (error) {
-        console.error('\n❌ Error generating navigation:', error);
+        console.error('[ERROR] Error generating navigation:', error);
         process.exit(1);
     }
 }
