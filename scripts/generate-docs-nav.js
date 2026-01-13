@@ -14,21 +14,6 @@ const path = require('path');
 const DOCS_DIR = path.join(__dirname, '../src/assets/docs');
 const OUTPUT_FILE = path.join(__dirname, '../src/assets/docs-navigation.json');
 
-// Icon mapping for categories
-const ICON_MAP = {
-    'Getting Started': 'rocket',
-    'architecture': 'architecture',
-    'development': 'code',
-    'API': 'api',
-    'Database': 'database',
-    'deployment': 'rocket',
-    'Tools': 'tools',
-    'operations': 'tools',
-    'Security': 'security',
-    'modules': 'code',
-    'Reference': 'database'
-};
-
 /**
  * Convert kebab-case or snake_case to Title Case
  * e.g., "getting-started" -> "Getting Started"
@@ -164,7 +149,6 @@ function scanDirectory(dir, baseDir = DOCS_DIR, depth = 0) {
                 const folderName = path.basename(fullPath);
                 const item = {
                     label: toTitleCase(folderName),
-                    icon: ICON_MAP[folderName] || 'folder',
                     children,
                     expanded: false
                 };
@@ -216,7 +200,6 @@ function generateNavigation() {
         {
             label: 'Home',
             route: '/',
-            icon: 'home'
         }
     ];
 

@@ -32,20 +32,4 @@ export class SidebarComponent {
     trackByItem(index: number, item: NavigationItem): string {
         return item.route || `${index}-${item.label}`;
     }
-
-    getIcon(icon?: string): string {
-        const iconMap: Record<string, string> = {
-            'home': '🏠',
-            'rocket': '🚀',
-            'architecture': '🏗️',
-            'code': '💻',
-            'api': '📡',
-            'database': '🗄️',
-            'tools': '🔧',
-            'security': '🔒',
-            'folder': '📁'
-        };
-
-        return icon ? iconMap[icon] || '📄' : '📄';
-    }
 }

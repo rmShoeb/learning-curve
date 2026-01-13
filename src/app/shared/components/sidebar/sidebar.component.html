@@ -14,9 +14,6 @@
     <!-- Parent item with children -->
     <button class="nav-link nav-parent" [class.level]="'level-' + level" (click)="toggleItem(item)"
         [class.expanded]="item.expanded" [class.has-active-child]="navigationService.hasActiveChild(item)">
-        @if (level === 0) {
-        <span class="nav-icon">{{ getIcon(item.icon) }}</span>
-        }
         <span class="nav-label">{{ item.label }}</span>
         <span class="chevron">›</span>
     </button>
@@ -34,9 +31,6 @@
     <!-- Leaf item (no children) -->
     <a [routerLink]="item.route" [class.active]="navigationService.isRouteActive(item.route)"
         [class.level]="'level-' + level" class="nav-link nav-child" (click)="onLinkClick()">
-        @if (level === 0) {
-        <span class="nav-icon">{{ getIcon(item.icon) }}</span>
-        }
         <span class="nav-label">{{ item.label }}</span>
     </a>
     }

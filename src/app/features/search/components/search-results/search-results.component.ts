@@ -53,20 +53,4 @@ export class SearchResultsComponent implements OnInit {
     getBreadcrumb(result: SearchResult): string {
         return this.searchService.getBreadcrumbText(result.breadcrumb);
     }
-
-    getIcon(icon?: string): string {
-        const iconMap: Record<string, string> = {
-            'home': '🏠',
-            'rocket': '🚀',
-            'architecture': '🏗️',
-            'code': '💻',
-            'api': '📡',
-            'database': '🗄️',
-            'tools': '🔧',
-            'security': '🔒',
-            'folder': '📁'
-        };
-
-        return icon ? iconMap[icon] || '📄' : '📄';
-    }
 }

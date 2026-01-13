@@ -15,12 +15,35 @@ export class DocHomeComponent {
     constructor() {
         this.quickLinks = [
             {
+                routerLink: "/Cloud",
+                text: "Cloud Computing",
+                children: [
+                    { routerLink: '/Cloud/AWS/intro', text: 'Amazon Web Services' },
+                    // { routerLink: '/Cloud/sql-server', text: 'Google Cloud Platform' },
+                    // { routerLink: '/Cloud/mysql', text: 'Microsoft Azure' },
+                ]
+            },
+            {
                 routerLink: "/database",
                 text: "Database",
                 children: [
-                    { routerLink: '/Database/RDBMS/intro', text: 'Relational Database Management System' },
+                    { routerLink: '/Database/RDBMS/01-intro', text: 'Relational Database Management System' },
                     { routerLink: '/Database/mysql', text: 'MySQL' },
                     { routerLink: '/Database/sql-server', text: 'SQL Server' },
+                    { routerLink: '/Database/database-migration/0-intro', text: 'Database Migration' },
+                ]
+            },
+            {
+                routerLink: "/framework",
+                text: "Frameworks",
+                children: [
+                    { routerLink: '/Framework/Angular/01-architecture', text: 'Angular' },
+                    { routerLink: '/Framework/angularjs', text: 'AngularJS' },
+                    { routerLink: '/Framework/Hibernate/01-intro', text: 'Hibernate' },
+                    { routerLink: '/Framework/junit', text: 'JUnit' },
+                    { routerLink: '/Framework/mockito', text: 'Mockito' },
+                    { routerLink: '/Framework/RxJS/intro', text: 'RxJS' },
+                    { routerLink: '/Framework/Spring Framework/intro', text: 'Spring Framework' },
                 ]
             },
             {
@@ -28,23 +51,10 @@ export class DocHomeComponent {
                 text: "Programming Languages",
                 children: [
                     { routerLink: '/Programming Language/csharp', text: 'C#' },
-                    { routerLink: '/Programming Language/CPP/intro', text: 'C++' },
-                    { routerLink: '/Programming Language/Java/introduction', text: 'Java' },
+                    { routerLink: '/Programming Language/CPP/01-intro', text: 'C++' },
+                    { routerLink: '/Programming Language/Java/00-introduction', text: 'Java' },
                     { routerLink: '/Programming Language/javascript', text: 'JavaScript' },
                     { routerLink: '/Programming Language/typescript', text: 'TypeScript' },
-                ]
-            },
-            {
-                routerLink: "/framework",
-                text: "Frameworks",
-                children: [
-                    { routerLink: '/Framework/Angular/intro', text: 'Angular' },
-                    { routerLink: '/Framework/angularjs', text: 'AngularJS' },
-                    { routerLink: '/Framework/Hibernate/intro', text: 'Hibernate' },
-                    { routerLink: '/Framework/junit', text: 'JUnit' },
-                    { routerLink: '/Framework/mockito', text: 'Mockito' },
-                    { routerLink: '/Framework/RxJS/intro', text: 'RxJS' },
-                    { routerLink: '/Framework/Spring Framework/intro', text: 'Spring Framework' },
                 ]
             },
             {
@@ -60,6 +70,7 @@ export class DocHomeComponent {
                 routerLink: "/others",
                 text: "Others",
                 children: [
+                    { routerLink: '/Others/automation/0-intro', text: 'CI/CD' },
                     { routerLink: '/Others/design-principles-patterns', text: 'Design Principles & Patterns' },
                     { routerLink: '/Others/rest-api-conventions', text: 'REST API Conventions' },
                     { routerLink: '/Others/System Design/intro', text: 'System Design' },

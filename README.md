@@ -130,7 +130,6 @@ No need to manually update navigation! The system automatically:
 - ✅ Scans `docs/` folder structure
 - ✅ Extracts titles from the first `# Heading` in each file
 - ✅ Creates hierarchical navigation based on folder structure
-- ✅ Generates icons based on folder names
 
 Simply run:
 ```bash

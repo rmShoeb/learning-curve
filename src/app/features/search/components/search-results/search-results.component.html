@@ -17,7 +17,7 @@
         @for (result of results(); track result.route) {
         <a [routerLink]="result.route" class="result-item">
             <div class="result-header">
-                <span class="result-icon">{{ getIcon(result.icon) }}</span>
+                <!-- <span class="result-icon">{{ getIcon(result.icon) }}</span> -->
                 <h2 class="result-title">{{ result.label }}</h2>
             </div>
             <p class="result-breadcrumb">{{ getBreadcrumb(result) }}</p>

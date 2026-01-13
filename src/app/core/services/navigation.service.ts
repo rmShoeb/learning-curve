@@ -47,8 +47,7 @@ export class NavigationService {
         this.navigationItems.set([
           {
             label: 'Home',
-            route: '/',
-            icon: 'home'
+            route: '/'
           }
         ]);
         this.loading.set(false);
