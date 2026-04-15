@@ -1,112 +1,153 @@
 [
   {
     "label": "Home",
-    "route": "/",
-    "icon": "home"
+    "route": "/"
+  },
+  {
+    "label": "Cloud",
+    "children": [
+      {
+        "label": "AWS",
+        "children": [
+          {
+            "label": "CloudWatch",
+            "route": "/Cloud/AWS/cloudwatch"
+          },
+          {
+            "label": "Introduction to Amazon Web Services",
+            "route": "/Cloud/AWS/intro"
+          },
+          {
+            "label": "Relation Database Service",
+            "route": "/Cloud/AWS/rds"
+          }
+        ],
+        "expanded": false
+      }
+    ],
+    "expanded": false
   },
   {
     "label": "Database",
-    "icon": "folder",
     "children": [
       {
-        "label": "RDBMS",
-        "icon": "folder",
+        "label": "Database Migration",
         "children": [
           {
-            "label": "00 - Tables",
-            "route": "/Database/RDBMS/tables"
+            "label": "0 Intro",
+            "route": "/Database/database-migration/0-intro"
           },
           {
-            "label": "01 - Introduction to RDBMS",
-            "route": "/Database/RDBMS/intro"
+            "label": "Flyway",
+            "route": "/Database/database-migration/flyway"
           },
           {
-            "label": "02 - Core SQL Concepts",
-            "route": "/Database/RDBMS/core"
+            "label": "Liquibase",
+            "route": "/Database/database-migration/liquibase"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "MySQL",
+        "children": [
+          {
+            "label": "01 Intro",
+            "route": "/Database/MySQL/01-intro"
           },
           {
-            "label": "03 - Grouping and Aggregation",
-            "route": "/Database/RDBMS/grouping-aggregation"
+            "label": "Data Manip Space Manage",
+            "route": "/Database/MySQL/data-manip-space-manage"
           },
           {
-            "label": "04 - Constraints",
-            "route": "/Database/RDBMS/constraints"
+            "label": "Memory Architecture Performance",
+            "route": "/Database/MySQL/memory-architecture-performance"
           },
           {
-            "label": "05 - Joins",
-            "route": "/Database/RDBMS/joins"
+            "label": "Physical Storage",
+            "route": "/Database/MySQL/physical-storage"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "RDBMS",
+        "children": [
+          {
+            "label": "Introduction to RDBMS",
+            "route": "/Database/RDBMS/01-intro"
           },
           {
-            "label": "06 - Combining Results (SET Operators)",
-            "route": "/Database/RDBMS/set"
+            "label": "Core SQL Concepts",
+            "route": "/Database/RDBMS/02-core"
           },
           {
-            "label": "07 - Subqueries",
-            "route": "/Database/RDBMS/subquery"
+            "label": "Grouping and Aggregation",
+            "route": "/Database/RDBMS/03-grouping-aggregation"
           },
           {
-            "label": "08 - Common Table Expressions (CTE)",
-            "route": "/Database/RDBMS/cte"
+            "label": "Constraints",
+            "route": "/Database/RDBMS/04-constraints"
           },
           {
-            "label": "09 - Conditional Logic",
-            "route": "/Database/RDBMS/conditional"
+            "label": "Joins",
+            "route": "/Database/RDBMS/05-joins"
           },
           {
-            "label": "10 - Window Functions",
-            "route": "/Database/RDBMS/window-function"
+            "label": "Common Table Expressions (CTE)",
+            "route": "/Database/RDBMS/08-cte"
           },
           {
-            "label": "11 - Data Transformation",
-            "route": "/Database/RDBMS/data-transformation"
+            "label": "Conditional Logic",
+            "route": "/Database/RDBMS/09-conditional"
           },
           {
-            "label": "12 - Handling JSON Data",
-            "route": "/Database/RDBMS/json"
+            "label": "Window Functions",
+            "route": "/Database/RDBMS/10-window-function"
           },
           {
-            "label": "13 - View",
-            "route": "/Database/RDBMS/views"
+            "label": "Data Transformation",
+            "route": "/Database/RDBMS/11-data-transformation"
           },
           {
-            "label": "14 - Variables",
-            "route": "/Database/RDBMS/variables"
+            "label": "Handling JSON Data",
+            "route": "/Database/RDBMS/12-json"
           },
           {
-            "label": "15 - Functions",
-            "route": "/Database/RDBMS/function"
+            "label": "View",
+            "route": "/Database/RDBMS/13-views"
           },
           {
-            "label": "16 - Stored Procedures",
-            "route": "/Database/RDBMS/stored-procedure"
+            "label": "Variables",
+            "route": "/Database/RDBMS/14-variables"
           },
           {
-            "label": "17 - Dynamic SQL",
-            "route": "/Database/RDBMS/dynamic-sql"
+            "label": "Functions",
+            "route": "/Database/RDBMS/15-function"
           },
           {
-            "label": "18 - Triggers",
-            "route": "/Database/RDBMS/trigger"
+            "label": "Stored Procedures",
+            "route": "/Database/RDBMS/16-stored-procedure"
           },
           {
-            "label": "19 - Transactions and Rollback",
-            "route": "/Database/RDBMS/transactions"
+            "label": "Dynamic SQL",
+            "route": "/Database/RDBMS/17-dynamic-sql"
+          },
+          {
+            "label": "Triggers",
+            "route": "/Database/RDBMS/18-trigger"
+          },
+          {
+            "label": "Index",
+            "route": "/Database/RDBMS/21-indexes"
+          },
+          {
+            "label": "Execution Plans",
+            "route": "/Database/RDBMS/22-execution-plan"
           },
           {
             "label": "20 - Data Normalization",
             "route": "/Database/RDBMS/normalization"
-          },
-          {
-            "label": "21 - Index",
-            "route": "/Database/RDBMS/indexes"
-          },
-          {
-            "label": "22 - Execution Plans",
-            "route": "/Database/RDBMS/execution-plan"
-          },
-          {
-            "label": "23 - Profiling: Finding the Bottleneck",
-            "route": "/Database/RDBMS/profiling"
           },
           {
             "label": "24 - Query Optimization",
@@ -117,6 +158,14 @@
             "route": "/Database/RDBMS/partitioning-sharding"
           },
           {
+            "label": "Improve RDBMS query performance through Profiling and Optimization techniques",
+            "route": "/Database/RDBMS/performance"
+          },
+          {
+            "label": "23 - Profiling: Finding the Bottleneck",
+            "route": "/Database/RDBMS/profiling"
+          },
+          {
             "label": "26 - Replication and Mirroring",
             "route": "/Database/RDBMS/replication-mirroring"
           },
@@ -125,8 +174,20 @@
             "route": "/Database/RDBMS/security"
           },
           {
-            "label": "Improve RDBMS query performance through Profiling and Optimization techniques",
-            "route": "/Database/RDBMS/performance"
+            "label": "06 - Combining Results (SET Operators)",
+            "route": "/Database/RDBMS/set"
+          },
+          {
+            "label": "07 - Subqueries",
+            "route": "/Database/RDBMS/subquery"
+          },
+          {
+            "label": "00 - Tables",
+            "route": "/Database/RDBMS/tables"
+          },
+          {
+            "label": "19 - Transactions and Rollback",
+            "route": "/Database/RDBMS/transactions"
           }
         ],
         "expanded": false
@@ -134,98 +195,90 @@
       {
         "label": "MS SQL Server",
         "route": "/Database/sql-server"
-      },
-      {
-        "label": "MySQL",
-        "route": "/Database/mysql"
       }
     ],
     "expanded": false
   },
   {
     "label": "Framework",
-    "icon": "folder",
     "children": [
       {
         "label": "Angular",
-        "icon": "folder",
         "children": [
           {
-            "label": "01 - Framework Architecture Overview",
-            "route": "/Framework/Angular/architecture"
-          },
-          {
-            "label": "02 - Basics of Application",
-            "route": "/Framework/Angular/basics"
-          },
-          {
-            "label": "03 - Form Handling and Validation",
-            "route": "/Framework/Angular/forms"
-          },
-          {
-            "label": "04 - Browser Storage",
-            "route": "/Framework/Angular/browser-storage"
-          },
-          {
-            "label": "05 - Basic Error Handling",
-            "route": "/Framework/Angular/error-handling"
-          },
-          {
-            "label": "06 - Routing",
-            "route": "/Framework/Angular/routing"
-          },
-          {
-            "label": "07 - Authentication",
-            "route": "/Framework/Angular/authentication"
-          },
-          {
-            "label": "08 - Authorization",
-            "route": "/Framework/Angular/authorization"
-          },
-          {
-            "label": "09 - Asynchronization",
-            "route": "/Framework/Angular/async"
-          },
-          {
             "label": "Resources",
-            "route": "/Framework/Angular/resources"
+            "route": "/Framework/Angular/00-resources"
+          },
+          {
+            "label": "Framework Architecture Overview",
+            "route": "/Framework/Angular/01-architecture"
+          },
+          {
+            "label": "Basics of Application",
+            "route": "/Framework/Angular/02-basics"
+          },
+          {
+            "label": "Form Handling and Validation",
+            "route": "/Framework/Angular/03-forms"
+          },
+          {
+            "label": "Browser Storage",
+            "route": "/Framework/Angular/04-browser-storage"
+          },
+          {
+            "label": "Basic Error Handling",
+            "route": "/Framework/Angular/05-error-handling"
+          },
+          {
+            "label": "Routing",
+            "route": "/Framework/Angular/06-routing"
+          },
+          {
+            "label": "Authentication",
+            "route": "/Framework/Angular/07-authentication"
+          },
+          {
+            "label": "Authorization",
+            "route": "/Framework/Angular/08-authorization"
+          },
+          {
+            "label": "Asynchronization",
+            "route": "/Framework/Angular/09-async"
           }
         ],
         "expanded": false
       },
       {
         "label": "Hibernate",
-        "icon": "folder",
         "children": [
           {
-            "label": "00 - Introduction",
-            "route": "/Framework/Hibernate/intro"
+            "label": "Introduction",
+            "route": "/Framework/Hibernate/01-intro"
           },
           {
-            "label": "01 - Session",
-            "route": "/Framework/Hibernate/session"
+            "label": "Session",
+            "route": "/Framework/Hibernate/02-session"
           },
           {
-            "label": "02 - Session Management Strategies",
-            "route": "/Framework/Hibernate/session-management"
+            "label": "Session Management Strategies",
+            "route": "/Framework/Hibernate/03-session-management"
           },
           {
-            "label": "03 - Key Operations with Hibernate Session",
-            "route": "/Framework/Hibernate/session-operations"
+            "label": "Key Operations with Hibernate Session",
+            "route": "/Framework/Hibernate/04-session-operations"
           },
           {
-            "label": "04 - Caching",
-            "route": "/Framework/Hibernate/caching"
+            "label": "Caching",
+            "route": "/Framework/Hibernate/05-caching"
           }
         ],
         "expanded": false
       },
       {
         "label": "RxJS",
-        "icon": "folder",
         "children": [
           {
-            "label": "00 - Introduction",
+            "label": "Introduction",
             "route": "/Framework/RxJS/intro"
           },
           {
@@ -237,59 +290,58 @@
       },
       {
         "label": "Spring Framework",
-        "icon": "folder",
         "children": [
           {
-            "label": "01 - What is Spring Framework?",
-            "route": "/Framework/Spring Framework/intro"
+            "label": "Resources",
+            "route": "/Framework/Spring Framework/00-resources"
           },
           {
-            "label": "02 - Bean",
-            "route": "/Framework/Spring Framework/bean"
+            "label": "What is Spring Framework?",
+            "route": "/Framework/Spring Framework/01-intro"
           },
           {
-            "label": "03 - Inversion of Control?",
-            "route": "/Framework/Spring Framework/ioc"
+            "label": "Bean",
+            "route": "/Framework/Spring Framework/02-bean"
           },
           {
-            "label": "04 - Configuration",
-            "route": "/Framework/Spring Framework/configuration"
+            "label": "Inversion of Control?",
+            "route": "/Framework/Spring Framework/03-ioc"
           },
           {
-            "label": "04 - Core Annotations",
-            "route": "/Framework/Spring Framework/annotations"
+            "label": "Core Annotations",
+            "route": "/Framework/Spring Framework/04-annotations"
           },
           {
-            "label": "05 - Spring Web MVC",
-            "route": "/Framework/Spring Framework/web-mvc"
+            "label": "Configuration",
+            "route": "/Framework/Spring Framework/05-configuration"
           },
           {
-            "label": "06 - Basic Exception Handling",
-            "route": "/Framework/Spring Framework/exception-handling"
+            "label": "Spring Web MVC",
+            "route": "/Framework/Spring Framework/06-web-mvc"
           },
           {
-            "label": "07 - Data Access",
-            "route": "/Framework/Spring Framework/data-access"
+            "label": "Basic Exception Handling",
+            "route": "/Framework/Spring Framework/07-exception-handling"
           },
           {
-            "label": "08 - Security & Authentication",
-            "route": "/Framework/Spring Framework/spring-security"
+            "label": "Data Access",
+            "route": "/Framework/Spring Framework/08-data-access"
+          },
+          {
+            "label": "Security & Authentication",
+            "route": "/Framework/Spring Framework/09-spring-security"
           },
           {
             "label": "09 - Testing",
-            "route": "/Framework/Spring Framework/testing"
+            "route": "/Framework/Spring Framework/10-testing"
           },
           {
-            "label": "10 - Spring Boot",
-            "route": "/Framework/Spring Framework/spring-boot"
+            "label": "Spring Boot",
+            "route": "/Framework/Spring Framework/11-spring-boot"
           },
           {
-            "label": "11 - Spring Transaction Management",
-            "route": "/Framework/Spring Framework/transaction-management"
-          },
-          {
-            "label": "Resources",
-            "route": "/Framework/Spring Framework/resources"
+            "label": "Spring Transaction Management",
+            "route": "/Framework/Spring Framework/12-transaction-management"
           }
         ],
         "expanded": false
@@ -315,11 +367,23 @@
   },
   {
     "label": "Others",
-    "icon": "folder",
     "children": [
       {
+        "label": "Automation",
+        "children": [
+          {
+            "label": "Continuous Integration and Continuous Delivery (or Deployment)",
+            "route": "/Others/automation/0-intro"
+          },
+          {
+            "label": "Jenkins",
+            "route": "/Others/automation/jenkins"
+          }
+        ],
+        "expanded": false
+      },
+      {
         "label": "System Design",
-        "icon": "folder",
         "children": [
           {
             "label": "Introduction",
@@ -341,79 +405,115 @@
   },
   {
     "label": "Programming Language",
-    "icon": "folder",
     "children": [
       {
-        "label": "Java",
-        "icon": "folder",
+        "label": "CPP",
         "children": [
           {
-            "label": "00 - Introduction",
-            "route": "/Programming Language/Java/introduction"
+            "label": "Introduction",
+            "route": "/Programming Language/CPP/01-intro"
           },
           {
-            "label": "01 - Object-Oriented Programming (OOP) with Java",
-            "route": "/Programming Language/Java/oop-concepts"
+            "label": "Arrays and Vectors",
+            "route": "/Programming Language/CPP/arr-vec"
           },
           {
-            "label": "02 - Strings",
-            "route": "/Programming Language/Java/strings"
+            "label": "Controlling Program Flow",
+            "route": "/Programming Language/CPP/controlling-program-flow"
           },
           {
-            "label": "03 - Date/Time API",
-            "route": "/Programming Language/Java/date-time-api"
+            "label": "Libraries",
+            "route": "/Programming Language/CPP/libraries"
           },
           {
-            "label": "04 - Stream API",
-            "route": "/Programming Language/Java/stream-api"
+            "label": "Classes and Objects",
+            "route": "/Programming Language/CPP/oop"
           },
           {
-            "label": "05 - Generics",
-            "route": "/Programming Language/Java/generics"
+            "label": "Pointers",
+            "route": "/Programming Language/CPP/pointer"
           },
           {
-            "label": "06 - Collections Framework and Data Structures",
-            "route": "/Programming Language/Java/collections-framework"
+            "label": "Statements and Operators",
+            "route": "/Programming Language/CPP/statement-operator"
           },
           {
-            "label": "07 - Lambda Expressions",
-            "route": "/Programming Language/Java/lambda-expression"
+            "label": "Variables and Constants",
+            "route": "/Programming Language/CPP/var-const"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "label": "Java",
+        "children": [
+          {
+            "label": "Introduction",
+            "route": "/Programming Language/Java/00-introduction"
           },
           {
-            "label": "08 - Exception Handling",
-            "route": "/Programming Language/Java/exception-handling"
+            "label": "Object-Oriented Programming (OOP) with Java",
+            "route": "/Programming Language/Java/01-oop-concepts"
           },
           {
-            "label": "09 - Java I/O (Input/Output)",
-            "route": "/Programming Language/Java/io"
+            "label": "Strings",
+            "route": "/Programming Language/Java/02-strings"
           },
           {
-            "label": "10 - Multithreading and Synchronization",
-            "route": "/Programming Language/Java/multithreading-and-synchronization"
+            "label": "Date/Time API",
+            "route": "/Programming Language/Java/03-date-time-api"
           },
           {
-            "label": "11 - Java Virtual Machine (JVM)",
-            "route": "/Programming Language/Java/jvm"
+            "label": "Stream API",
+            "route": "/Programming Language/Java/04-stream-api"
           },
           {
-            "label": "12 - Memory Management and Garbage Collection",
-            "route": "/Programming Language/Java/memory-management-and-garbage-collection"
+            "label": "Generics",
+            "route": "/Programming Language/Java/05-generics"
           },
           {
-            "label": "13 - Networking",
-            "route": "/Programming Language/Java/networking"
+            "label": "Collections Framework and Data Structures",
+            "route": "/Programming Language/Java/06-collections-framework"
           },
           {
-            "label": "14 - Non-blocking I/O (NIO)",
-            "route": "/Programming Language/Java/nio"
+            "label": "Lambda Expressions",
+            "route": "/Programming Language/Java/07-lambda-expression"
           },
           {
-            "label": "15 - Servlets",
-            "route": "/Programming Language/Java/servlets"
+            "label": "Exception Handling",
+            "route": "/Programming Language/Java/08-exception-handling"
           },
           {
-            "label": "16 - Java Server Pages (JSP)",
-            "route": "/Programming Language/Java/jsp"
+            "label": "Java I/O (Input/Output)",
+            "route": "/Programming Language/Java/09-io"
+          },
+          {
+            "label": "Multithreading and Synchronization",
+            "route": "/Programming Language/Java/10-multithreading-and-synchronization"
+          },
+          {
+            "label": "Java Virtual Machine (JVM)",
+            "route": "/Programming Language/Java/11-jvm"
+          },
+          {
+            "label": "Memory Management and Garbage Collection",
+            "route": "/Programming Language/Java/12-memory-management-and-garbage-collection"
+          },
+          {
+            "label": "Networking",
+            "route": "/Programming Language/Java/13-networking"
+          },
+          {
+            "label": "Non-blocking I/O (NIO)",
+            "route": "/Programming Language/Java/14-nio"
+          },
+          {
+            "label": "Servlets",
+            "route": "/Programming Language/Java/15-servlets"
+          },
+          {
+            "label": "Java Server Pages (JSP)",
+            "route": "/Programming Language/Java/16-jsp"
           }
         ],
         "expanded": false
@@ -421,10 +521,6 @@
       {
         "label": "C#",
         "route": "/Programming Language/csharp"
-      },
-      {
-        "label": "C++",
-        "route": "/Programming Language/cpp"
       },
       {
         "label": "JavaScript",
@@ -439,7 +535,6 @@
   },
   {
     "label": "Tools",
-    "icon": "folder",
     "children": [
       {
         "label": "Git",

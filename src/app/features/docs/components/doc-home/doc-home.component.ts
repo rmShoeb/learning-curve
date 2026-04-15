@@ -28,7 +28,7 @@ export class DocHomeComponent {
                 text: "Database",
                 children: [
                     { routerLink: '/Database/RDBMS/01-intro', text: 'Relational Database Management System' },
-                    { routerLink: '/Database/mysql', text: 'MySQL' },
+                    { routerLink: '/database/mysql/01-intro', text: 'MySQL' },
                     { routerLink: '/Database/sql-server', text: 'SQL Server' },
                     { routerLink: '/Database/database-migration/0-intro', text: 'Database Migration' },
                 ]
