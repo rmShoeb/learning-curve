@@ -41,7 +41,7 @@ export class SearchService {
 
     const normalizedQuery = query.toLowerCase().trim();
     const titleResults: SearchResult[] = [];
-    const navigation = this.navigationService.navigation();
+    const navigation = this.navigationService.getNavigationItems();
 
     // First, search through navigation items (titles)
     this.searchItems(navigation, normalizedQuery, [], titleResults);

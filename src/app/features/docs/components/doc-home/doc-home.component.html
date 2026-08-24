@@ -1,25 +1,12 @@
 <div class="doc-home">
     <h1>Welcome to Learning Curve</h1>
 
-    <p class="lead">
-        Find architecture guides, API references, development guidelines, and more.
-    </p>
+    <p class="lead">Find architecture guides, API references, development guidelines, and more.</p>
 
     <div class="quick-links">
-        @for (item of quickLinks; track $index) {
+        @for (item of titles(); track $index) {
             <div class="quick-link-card">
-                <h3 class="card-title">{{item.text}}</h3>
-                @if (item.children) {
-                    <ul class="list-group list-group-flush">
-                        @for (child of item.children; track $index) {
-                            <li class="list-group-item">
-                                <a class="link-underline-light" routerLink="{{child.routerLink}}">
-                                    {{child.text}}
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                }
+                <h3 class="card-title">{{item}}</h3>
             </div>
         }
     </div>

@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <nav class="nav-tree">
-        @for (item of navigationService.navigation(); track trackByItem($index, item)) {
+        @for (item of navigationService.getNavigationItems(); track trackByItem($index, item)) {
         <div class="nav-item">
             <ng-container *ngTemplateOutlet="navItemTemplate; context: { $implicit: item, level: 0 }"></ng-container>
         </div>
