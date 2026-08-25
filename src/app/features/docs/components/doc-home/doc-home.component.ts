@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { NavigationService } from '@app/core/services/navigation.service';
 
 @Component({
@@ -8,23 +8,14 @@ import { NavigationService } from '@app/core/services/navigation.service';
     styleUrl: './doc-home.component.css'
 })
 export class DocHomeComponent {
-    titles = signal<string[]>([]);
     private readonly navigationService = inject(NavigationService);
+    readonly titles = computed(() => {
+        if (this.navigationService.isLoading()) {
+            return [];
+        }
 
-    constructor() {
-
-        effect(() => {
-            if(!this.navigationService.isLoading()) {
-                this.generateQuickLinks()
-            }
-        });
-    }
-
-    generateQuickLinks() {
-        this.navigationService.getNavigationItems().forEach((group) => {
-            if(group.children) {
-                this.titles.update((list) => [...list, group.label]);
-            }
-        });
-    }
+        return this.navigationService.getNavigationItems()
+            .filter(group => group.children)
+            .map(group => group.label);
+    });
 }
