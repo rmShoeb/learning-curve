@@ -1,0 +1,1 @@
+# Vertical vs. Horizontal Scaling (Sharding, Partitioning)
