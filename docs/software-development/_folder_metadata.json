@@ -1,0 +1,6 @@
+{
+    "$schema": "../folder_metadata.schema.json",
+    "label": "Software Development & Languages",
+    "order": 2,
+    "hidden": false
+}

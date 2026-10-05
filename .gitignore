@@ -1,0 +1,42 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Angular cache
+.angular/
+
+# python
+venv/
+.venv/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.log
+*.cache
+
+# files to ignore
