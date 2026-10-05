@@ -1,0 +1,31 @@
+# Scaling Strategies
+- While relational databases scale horizontally through sharding tables, graph traversal performance relies on low-latency, multi-hop pointer chasing across contiguous memory pages.
+-  Vertical Scaling
+    - Upgrade instance type when using provisioned mode (e.g. `r6i` to `r7i`).
+    - Serverless mode scaless NAU automatically with load. 1 NCU provides approximately 2 GB of RAM.
+- Horizontal Scaling
+    - Add read replicas. They execute read queries directly against the shared storage volume.
+    - Replicas receive Write-Ahead Log (WAL) streams directly from the writer to invalidate and update their local buffer caches.
+    - The Reader Endpoint distributes read-only query requests across all available replicas in a cluster using DNS-level round-robin load balancing.
+- Write Scaling Considerations
+    - Because Neptune uses a single-writer architecture, write operations cannot be distributed across multiple instances within a single cluster.
+    - Group multiple graph mutations into single transactions to reduce network overhead and transaction commit latency.
+    - When ingesting large datasets, bypass standard query APIs and use the native Neptune Bulk Loader, which loads data directly into storage from Amazon S3 using parallel processing paths.
+- Connection Scaling & Pool Management
+    - Neptune enforces upper limits on concurrent active WebSocket connections based on the instance class.
+    - For example, `db.r6g.4xlarge` allows 16,384 maximum concurrent connections, and serverless mode can have 32,768 at maximum NCU.
+    - Size application connection pools to match the total vCPU count of target DB instances.
+    - Excessive idle connections waste memory resources on the database engine.
+- Large Graph Considerations: Handling Super-Nodes
+    - Super-Nodes are nodes with thousands or millions of incoming/outgoing edges, such as celebrity accounts or major distribution hubs.
+    - A common challenge in large-scale graph databases is the presence of Super-Nodes.
+    - Avoid unbounded traversals across super-nodes. Restrict edges using explicit property filters, limit limits, or range pagination.
+    - Subdivide a single super-node into a logical group of virtual sub-nodes, distributing edge pointers across a cluster of related entities.
+    - For full-graph algorithms, export data to Neptune Analytics or process workloads using Graph Neural Networks instead of executing transactional OLTP traversals.
+- Capacity Planning
+    - $\text{Required Buffer RAM} \approx \left( \vert{}V\vert{} \times S_v + \vert{}E\vert{} \times S_e + \vert{}P\vert{} \times S_p \right) \times \text{Working Set Ratio}$
+        - $\vert{}V\vert{}, \vert{}E\vert{}, \vert{}P\vert{}$ represent the total counts of Vertices, Edges, and Properties.
+        - $S_v, S_e, S_p$ are average storage byte sizes for structural index references.
+        - $\text{Working Set Ratio}$ represents the percentage of total graph data actively queried during peak traffic hours (typically $20\%$ to $30\%$ for transactional workloads).
+    - To guarantee single-digit millisecond query response times, select an instance class whose total RAM accommodates the complete index footprint of the peak working set.
+    - If total index size exceeds physical memory, disk swapping will cause query latency spikes.
