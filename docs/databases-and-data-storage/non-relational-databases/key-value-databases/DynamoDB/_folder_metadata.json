@@ -1,0 +1,5 @@
+{
+    "$schema": "../../../../folder_metadata.schema.json",
+    "label": "DynamoDB",
+    "order": 1
+}

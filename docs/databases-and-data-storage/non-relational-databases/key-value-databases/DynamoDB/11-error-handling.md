@@ -1,0 +1,15 @@
+# Error Handling
+Learn the important categories:
+
+ConditionalCheckFailedException
+ProvisionedThroughputExceededException
+ResourceNotFoundException
+ValidationException
+TransactionCanceledException
+
+Understand:
+
+Retryable vs non-retryable errors
+Exponential backoff
+SDK retry behavior
+Idempotency
