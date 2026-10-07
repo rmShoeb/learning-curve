@@ -8,7 +8,7 @@
 
 ### Reading Native Request Inputs
 - PHP automatically populates specific superglobals based on the content type and HTTP method sent by the client.
-- `$_GET` parses URL query parameters (e.g., https://api.example.com/users?status=active&limit=10).
+- `$_GET` parses URL query parameters (e.g., `https://api.example.com/users?status=active&limit=10`).
 - Despite its name, `$_GET` is populated for any HTTP request method that contains query parameters in the URL, including `POST`, `PUT`, or `DELETE` requests (e.g., `POST /users?action=sync`).
 - **HTML Form Inputs:** `$_POST` parses key-value body payloads only when the request uses `POST` and sets the `Content-Type` header to:
     - `application/x-www-form-urlencoded`
@@ -16,6 +16,7 @@
 - **Request Server Environment:** `$_SERVER` contains headers, paths, server configurations, and HTTP request context provided by the web server (Apache, Nginx, or Caddy).
 
 ```php
+<?php
 // Request URL: /users?status=active&page=2
 $status = $_GET['status'] ?? 'all';
 $page   = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -28,6 +29,7 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];                 // e.g., 'GET', 'POST'
 $requestUri = $_SERVER['REQUEST_URI'];                    // e.g., '/api/v1/users?id=10'
 $clientIp   = $_SERVER['REMOTE_ADDR'];                    // Originating IP address
 $userAgent  = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';   // Client User-Agent string
+>
 ```
 
 ### Parsing non-POST payloads
@@ -35,7 +37,9 @@ $userAgent  = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';   // Client User-Agent s
 - PHP's `$_POST` superglobal is completely empty when receiving `application/json` payloads or non-`POST` requests (`PUT`, `PATCH`, `DELETE`).
 - To read raw HTTP request bodies, custom API controllers read the `php://input` stream directly.
 - `php://input` is a read-only stream that yields the raw bytes from the HTTP request body.
+
     ```php
+    <?php
     // Read the raw HTTP request body string
     $rawPayload = file_get_contents('php://input');
 
@@ -54,7 +58,9 @@ $userAgent  = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';   // Client User-Agent s
 
     // $data is now a standard PHP associative array ready for use
     $email = $data['email'] ?? null;
+    >
     ```
+
 - `php://input` cannot be read more than once in SAPI environments with `enctype="multipart/form-data"`.
 - Reading `file_get_contents('php://input')` pulls the entire payload into RAM.
 - For API endpoints expecting large file uploads via REST, raw PHP code uses `fopen('php://input', 'rb')` to stream data in chunks rather than buffering the entire payload into memory.
@@ -65,12 +71,14 @@ $userAgent  = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';   // Client User-Agent s
 #### Standard Method (`getallheaders()`)
 - In web server environments (Apache, Nginx with FPM), `getallheaders()` returns an associative array of all client HTTP headers.
 ```php
+<?php
 $headers = getallheaders();
 // Accessing specific headers (Note: Header keys can vary in casing depending on server)
 $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? null;
+>
 ```
 
-#### Fallback Server Extraction via `$_SERVER`*
+#### Fallback Server Extraction via `$_SERVER`
 - If running under specific CGI/SAPI environments where `getallheaders()` is unavailable, custom APIs extract headers directly from `$_SERVER`.
 - PHP automatically converts incoming request headers in `$_SERVER` using three rules:
     - Prefixes the header name with `HTTP_`.
@@ -92,6 +100,7 @@ $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? null;
 - By default, Apache strips the Authorization header (`HTTP_AUTHORIZATION`) when forwarding requests to PHP CGI/FPM process pools. This explicit rule preserves Bearer tokens for authentication handlers.
 
 ```php
+<?php
 # .htaccess file
 RewriteEngine On
 
@@ -104,6 +113,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Otherwise, rewrite all traffic to index.php
 RewriteRule ^ index.php [QSA,L]
+>
 ```
 
 #### Nginx Configuration
@@ -114,6 +124,7 @@ RewriteRule ^ index.php [QSA,L]
 #### Simple Switch/Method Dispatching (Legacy Style)
 
 ```php
+<?php
 $method = $_SERVER['REQUEST_METHOD'];
 $uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -135,12 +146,14 @@ switch ($uri) {
         echo json_encode(['error' => 'Endpoint Not Found']);
         break;
 }
+>
 ```
 
 #### Regex Dynamic Routing
 - Supports dynamic route variables (e.g., `/users/{id}` or `/orders/{id}/items`).
 
 ```php
+<?php
 class Router {
     private array $routes = [];
 
@@ -182,14 +195,73 @@ class Router {
         echo json_encode(['error' => 'Route not found']);
     }
 }
+>
 ```
 
-
-.htaccess / Nginx rewrite rules (How all incoming API requests redirect to index.php)
-Custom URI parsing (Regex routing vs. switch($_SERVER['REQUEST_METHOD']) routing)
-Middleware patterns (Authentication checks, CORS header injection, logging wrappers)
-
 ## JSON Response Pipeline
-Setting response status codes: http_response_code(200)
-Setting content headers: header('Content-Type: application/json')
-Data Serialization: json_encode() and handling JSON formatting errors (json_last_error())
+
+### HTTP Status Codes & Response Headers
+- To return a valid REST API response, PHP must emit both an HTTP status code and an explicit `Content-Type` header before sending any output bytes to the client.
+-  Setting Response Status Codes
+    - Native function `http_response_code(int $code)` gets or sets the HTTP response status code.
+
+    ```php
+    // Sets the HTTP status to 201 Created
+    http_response_code(201);
+
+    // Reads the current status code back
+    $currentStatus = http_response_code(); // Returns 201
+    ```
+
+- Setting Response Headers
+    - The `header(string $header, bool $replace = true, int $response_code = 0)` function sends raw HTTP headers directly to the web server/client.
+
+    ```php
+    // Explicitly notify client payload is JSON formatted
+    header('Content-Type: application/json; charset=utf-8');
+
+    // Prevent client/proxy caching for dynamic API endpoints
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+
+    // CORS / Security headers
+    header('X-Content-Type-Options: nosniff');
+    ```
+
+- HTTP headers and status codes must be sent before any response content body (HTML, whitespace, or BOM markers) is output.
+- Otherwise, it will triggers PHP warning "Cannot modify header information - headers already sent"
+- To prevent this in custom frameworks, APIs often use Output Buffering at entry points.
+
+### Data Serialization with `json_encode()`
+- `json_encode(mixed $value, int $flags = 0, int $depth = 512)` converts PHP data structures (arrays, scalar primitives, objects) into JSON formatted strings.
+- Modern and legacy raw PHP applications pass bitmask flags into `json_encode()` to alter output format and safety parameters.
+- `JSON_UNESCAPED_SLASHES`: Prevents escaping `/` as `\/` (keeps URLs readable).
+- `JSON_UNESCAPED_UNICODE`: Encodes multibyte UTF-8 characters natively instead of converting them to unicode escape sequences like `\u00e0`.
+- `JSON_NUMERIC_CHECK`: Forces stringified numbers (`"100"`) to serialize as native numeric types (`100`). This can convert string phone numbers or ZIP codes like `"01234"` to integers, stripping leading zeros.
+- `JSON_PRETTY_PRINT`: Formats output with indentation whitespace for visual debugging.
+- `JSON_THROW_ON_ERROR` (PHP 7.3+): Instructs `json_encode()` or `json_decode()` to throw a `JsonException` upon failure rather than returning false.
+
+```php
+$data = [
+    'id' => 42,
+    'title' => 'API Guide & Tips',
+    'url' => 'https://example.com/api?user=1&type=test',
+    'amount' => 1250.50
+];
+
+// Standard Production REST Encoding
+echo json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+// Output: {"id":42,"title":"API Guide & Tips","url":"https://example.com/api?user=1&type=test","amount":1250.5}
+
+// Development / Debug Pretty Printing
+echo json_encode($data, JSON_PRETTY_PRINT);
+```
+
+### Handling JSON Serialization Errors
+- By default, if `json_encode()` fails, it returns `false` silently.
+- Outputting `false` directly results in an empty response body sent to the client, even if HTTP `200 OK` status was declared.
+- `json_last_error()` is used in legacy PHP to check for errors.
+- Common Error Codes returned by `json_last_error()`:
+    - `JSON_ERROR_DEPTH`: Exceeded maximum stack depth (default 512).
+    - `JSON_ERROR_STATE_MISMATCH`: Invalid or malformed JSON state.
+    - `JSON_ERROR_CTRL_CHAR`: Unexpected control character found.
+    - `JSON_ERROR_UTF8`: Malformed UTF-8 characters. Extremely common when pulling raw legacy MySQL database columns saved in non-UTF8 character sets like `latin1`.

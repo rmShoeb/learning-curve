@@ -16,6 +16,7 @@
     - When `false`, PDO sends actual prepared statements to MySQL via the binary protocol, forcing the database engine to parse and compile the SQL template independently of runtime parameters.
 
 ```php
+<?php
 $dsn = 'mysql:host=rds-primary.c123456.us-east-1.rds.amazonaws.com;dbname=app_db;port=3306;charset=utf8mb4';
 $username = 'db_user';
 $password = 'secret_pass';
@@ -31,23 +32,27 @@ try {
 } catch (PDOException $e) {
     // Exception message contains sensitive host/credential information
 }
+>
 ```
 
 ### Prepared statements and Parameter binding
 - Prepared statements separate SQL compilation from execution, rendering parameter payload values incapable of altering SQL query structure.
 - Positional Placeholders (`?`)
     ```php
+    <?php
     $sql = "SELECT id, email, status FROM users WHERE status = ? AND created_at >= ?";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute(['active', '2026-01-01 00:00:00']);
     $users = $stmt->fetchAll();
+    >
     ```
 - Named Placeholders (`:name`)
     - `bindValue()` passes the value directly at the moment of binding.
     - `bindParam()` binds by reference (`&$variable`), evaluating the value only when `$stmt->execute()` is invoked.
     - Using `bindParam()` inside loops without careful variable management can introduce unexpected state mutation bugs.
     ```php
+    <?php
     $sql = "SELECT id, email, status FROM users WHERE status = :status AND created_at >= :created_at";
     $stmt = $pdo->prepare($sql);
 
@@ -55,6 +60,7 @@ try {
     $stmt->bindValue(':status', 'active', PDO::PARAM_STR);
     $stmt->bindValue(':created_at', '2026-01-01 00:00:00', PDO::PARAM_STR);
     $stmt->execute();
+    >
     ```
 
 ### Fetch modes
@@ -67,6 +73,7 @@ try {
     - If class property defaults are declared in code, constructor assignments will overwrite values hydrated by PDO during execution.
 
 ```php
+<?php
 class UserEntity {
     public int $id;
     public string $username;
@@ -86,6 +93,7 @@ $row = $stmt->fetch(PDO::FETCH_OBJ);
 
 $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
 $user = $stmt->fetch(); // $user is an instance of UserEntity
+>
 ```
 
 ### Error Handling Modes (`PDO::ATTR_ERRMODE`)
@@ -98,6 +106,8 @@ $user = $stmt->fetch(); // $user is an instance of UserEntity
 - Enclosing DDL queries inside PDO transactions will break rollback functionality.
 
 ```php
+<?php
+// sample transaction handling
 try {
     $pdo->beginTransaction();
 
@@ -114,65 +124,68 @@ try {
     }
     throw $e;
 }
+>
 ```
 
 ## Deconstructing the Active Record Pattern
 - The Active Record architectural pattern maps a database table or view to a class, and an individual database row to an instance of that class.
 - **Single Responsibility Dual Role:** An Active Record instance carries both business domain data (row attributes) and database persistence behavior (`save()`, `delete()`, `update()`).
 
-```
-Database Table: `users`               PHP Class Definition: `User`
-+----+----------+-----------------+   +--------------------------------+
-| id | name     | email           |   | class User extends Model { ... }|
-+----+----------+-----------------+   +--------------------------------+
-|  1 | Alice    | alice@test.com  |  ---> $user1 = new User(); (Row 1)
-|  2 | Bob      | bob@test.com    |  ---> $user2 = new User(); (Row 2)
-+----+----------+-----------------+
-```
+    ```
+    Database Table: `users`               PHP Class Definition: `User`
+    +----+----------+-----------------+   +--------------------------------+
+    | id | name     | email           |   | class User extends Model { ... }|
+    +----+----------+-----------------+   +--------------------------------+
+    |  1 | Alice    | alice@test.com  |  ---> $user1 = new User(); (Row 1)
+    |  2 | Bob      | bob@test.com    |  ---> $user2 = new User(); (Row 2)
+    +----+----------+-----------------+
+    ```
 
 - Rather than declaring static public class properties for every database table column, custom Active Record implementations intercept reads and writes using internal key-value storage.
 
-```php
-abstract class ActiveRecord {
-    protected array $attributes = [];
-    protected array $original = [];
+    ```php
+    <?php
+    abstract class ActiveRecord {
+        protected array $attributes = [];
+        protected array $original = [];
 
-    public function __construct(array $attributes = []) {
-        $this->fill($attributes);
-    }
-
-    public function fill(array $attributes): void {
-        foreach ($attributes as $key => $value) {
-            $this->__set($key, $value);
-        }
-    }
-
-    public function __get(string $key): mixed {
-        // Support custom getter mutators (e.g., getFirstNameAttribute)
-        $mutator = 'get' . $this->studly($key) . 'Attribute';
-        if (method_exists($this, $mutator)) {
-            return $this->$mutator();
+        public function __construct(array $attributes = []) {
+            $this->fill($attributes);
         }
 
-        return $this->attributes[$key] ?? null;
-    }
-
-    public function __set(string $key, mixed $value): void {
-        // Support custom setter mutators (e.g., setPasswordAttribute)
-        $mutator = 'set' . $this->studly($key) . 'Attribute';
-        if (method_exists($this, $mutator)) {
-            $this->$mutator($value);
-            return;
+        public function fill(array $attributes): void {
+            foreach ($attributes as $key => $value) {
+                $this->__set($key, $value);
+            }
         }
 
-        $this->attributes[$key] = $value;
-    }
+        public function __get(string $key): mixed {
+            // Support custom getter mutators (e.g., getFirstNameAttribute)
+            $mutator = 'get' . $this->studly($key) . 'Attribute';
+            if (method_exists($this, $mutator)) {
+                return $this->$mutator();
+            }
 
-    protected function studly(string $value): string {
-        return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $value)));
+            return $this->attributes[$key] ?? null;
+        }
+
+        public function __set(string $key, mixed $value): void {
+            // Support custom setter mutators (e.g., setPasswordAttribute)
+            $mutator = 'set' . $this->studly($key) . 'Attribute';
+            if (method_exists($this, $mutator)) {
+                $this->$mutator($value);
+                return;
+            }
+
+            $this->attributes[$key] = $value;
+        }
+
+        protected function studly(string $value): string {
+            return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $value)));
+        }
     }
-}
-```
+    >
+    ```
 
 - To avoid generating unnecessary update queries that overwrite unchanged columns, active record models maintain an internal record of original attributes populated during database hydration.
 

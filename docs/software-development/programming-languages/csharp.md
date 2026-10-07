@@ -1,10 +1,10 @@
-# C#
+# C\#
 
-# Setup
+## Setup
 
 [Install C# on Ubuntu and run programs](https://terminalroot.com/how-to-install-csharp-on-ubuntu-and-getting-started/)
 
-# Introduction
+## Introduction
 
 ```c#
 using System;
@@ -22,16 +22,16 @@ namespace HelloWorld{
 ```
 
 
-# Variables and Constants
+## Variables and Constants
 
-## Data types
+### Data types
 int, double, char, string, bool
 
-## Storage
+### Storage
 int-4 bytes, long-8 bytes, float-4 bytes, double-8bytes, bool-1 bit, char-2 bytes,
 string-2 bytes per character
 
-## Declaration
+### Declaration
 
 ```c#
 // type variableName = value;
@@ -52,16 +52,16 @@ x = y = z = 50;
 bool b = true; // or false
 ```
 
-## Type Casting
+### Type Casting
 
-### Implicit casting (automatically)
+#### Implicit casting (automatically)
 
 ```c#
 int x = 6;
 double d = x;
 ```
 
-### Explicit Casting (manually)
+#### Explicit Casting (manually)
 
 ```c#
 int x = 6;
@@ -77,7 +77,7 @@ Convert.ToInt32() // (int)
 Convert.ToInt64() // (long)
 ```
 
-## Strings
+### Strings
 A string variable contains a collection of characters surrounded by double quotes.
 
 ```c#
@@ -99,7 +99,7 @@ str[0] // string access
 str.IndexOf('e') // index of the given character in the string
 ```
 
-## Input/Output
+### Input/Output
 
 ```c#
 Console.ReadLine(); // returns a string
@@ -112,7 +112,7 @@ int y = int.Parse(tokens[1]);
 ```
 Entering wrong input type will invoke exception (e.g. `System.FormatException`).
 
-## Operators
+### Operators
 Pretty much the same as C/C++. But, C# uses the `+` operator for both addition and concatenation.
 
 ```c#
@@ -120,7 +120,7 @@ Pretty much the same as C/C++. But, C# uses the `+` operator for both addition a
 ```
 
 
-# Others
+## Others
 
 ```c#
 // Shorthand if-else
@@ -277,6 +277,6 @@ cities.Remove("UK"); // removes UK
 cities.Remove("France"); //throws run-time exception: KeyNotFoundException
 ```
 
-# Resources
+## Resources
 - [C# Tutorial](https://www.w3schools.com/cs/index.php)
 - [Learn C# Programming](https://www.tutorialsteacher.com/csharp)

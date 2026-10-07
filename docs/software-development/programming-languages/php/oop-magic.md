@@ -12,11 +12,13 @@
 - Though technically it is passing a copy of an object identifier value.
 
 ```php
+<?php
 $user1 = new User("Alice");
 $user2 = $user1;          // Both point to the same object instance
 $user2->name = "Bob";     // Modifies $user1->name as well!
 
 $user3 = clone $user1;    // Creates a shallow copy of the object
+>
 ```
 
 #### Constructors & Property Promotion (PHP 8.0+)
@@ -25,6 +27,7 @@ $user3 = clone $user1;    // Creates a shallow copy of the object
 - Modern PHP codebases use Constructor Property Promotion, which combines parameter declaration and property assignment into one step.
 
 ```php
+<?php
 // Modern Syntax (PHP 8.0+)
 class User {
     public function __construct(
@@ -46,6 +49,7 @@ class User {
         $this->email = $email;
     }
 }
+>
 ```
 
 #### Critical PHP Traps & Gotchas
@@ -89,9 +93,10 @@ PHP enforces `public`, `protected`, and `private` at runtime.
 | `parent::`      | References the parent class                                  | `parent::__construct()` |
 
 #### Late Static Binding (`self::` vs `static::`)
-- When a parent base class (like `Model`) provides static query methods (like `User::find()`), using `self::` points to `Model`, whereas `static::` points to `User`.
+- When a parent base class (like `BaseModel`) provides static query methods (like `User::find()`), using `self::` points to `BaseModel`, whereas `static::` points to `User`.
 
 ```php
+<?php
 abstract class BaseModel {
     public static function getTableNameSelf(): string {
         return self::$table; // Binds at compile-time to BaseModel
@@ -108,6 +113,7 @@ class User extends BaseModel {
 
 // User::getTableNameSelf();   --> Error: Undefined static property BaseModel::$table
 // User::getTableNameStatic(); --> Returns "users"
+>
 ```
 
 #### Static Traps to Watch For
@@ -130,6 +136,7 @@ class User extends BaseModel {
 - They are heavily used in custom ORMs for adding features like soft-deletes, timestamp tracking, or logging.
 
 ```php
+<?php
 trait SoftDelete {
     protected ?string $deletedAt = null;
 
@@ -146,6 +153,7 @@ class User extends BaseModel {
 class Post extends BaseModel {
     use SoftDelete; // Reuses exact same logic in Post
 }
+>
 ```
 
 #### Gotchas with Traits
@@ -156,11 +164,13 @@ class Post extends BaseModel {
 - Naming Collisions
     - If two traits imported by the same class define a method with the exact same name, PHP throws a fatal compile error unless resolved using the `insteadof` operator:
         ```php
+        <?php
         class Product {
             use TraitA, TraitB {
                 TraitA::log insteadof TraitB; // Explicitly pick TraitA's log method
             }
         }
+        >
         ```
 
 ## Magic Methods
@@ -169,11 +179,11 @@ class Post extends BaseModel {
 
 ### Object Lifecycle
 
-#### __construct()
+#### `__construct()`
 - Executes automatically when an object is instantiated via `new`.
 - Used for dependency injection, initializing model attributes, or opening database/file connections.
 
-#### __destruct()
+#### `__destruct()`
 - Executes automatically when no references to the object remain in memory, or during script shutdown.
 - Used for cleanups, closing database connections, flushing log buffers, or removing temporary locks.
 - It runs when memory is cleared by PHP's garbage collector.
@@ -185,9 +195,11 @@ class Post extends BaseModel {
 - When code accesses `$user->email`, PHP notices that `$email` is not declared on the class and automatically delegates the action to `__get()` and `__set()`.
 
 ```php
+<?php
 $user = new User();
 $user->name = "Alice"; // Fires __set('name', 'Alice') -> populates $attributes['name']
 echo $user->name;      // Fires __get('name')         -> returns $attributes['name']
+>
 ```
 
 ### Dynamic Method Interception
@@ -196,6 +208,7 @@ echo $user->name;      // Fires __get('name')         -> returns $attributes['na
 - `__callStatic(string $name, array $arguments)` is triggered when calling an inaccessible or non-existent static method.
 
 ```php
+<?php
 class User extends Model {
     public static function __callStatic(string $method, array $args): mixed {
         if (str_starts_with($method, 'findBy')) {
@@ -216,6 +229,7 @@ $user = User::findByName("Alice");
 // 1. PHP checks if User::findByName() exists. It doesn't.
 // 2. PHP calls User::__callStatic('findByName', ['Alice']).
 // 3. Method parses 'findByName' -> column 'name', executes SQL query automatically.
+>
 ```
 
 ### Serialization and Type Casting
@@ -228,7 +242,7 @@ $user = User::findByName("Alice");
     - If so, it invokes `jsonSerialize()` to extract serializable data.
 
 ## Namespaces & Autoloading
-- Modern and legacy raw PHP systems use Namespaces to prevent class name collisions and Autoloaders to automatically locate and load file paths into memory on demand, instead of hundreds of manual `require_once` or `include_once` statements at the top of files.
+- Modern and legacy raw PHP systems use namespaces to prevent class name collisions and Autoloaders to automatically locate and load file paths into memory on demand, instead of hundreds of manual `require_once` or `include_once` statements at the top of files.
 
 ### Namespace definitions and `use` imports
 - Namespaces resolve class name conflicts by organizing code into logical directories/virtual modules, similar to packages in Java or namespaces in C#.
@@ -250,9 +264,8 @@ class User {
     // CORRECT: Leading \ instructs PHP to look in the Global Namespace
     $pdo = new \PDO(...);
 }
-```
+>
 
-```php
 <?php
 namespace App\Controllers;
 
@@ -267,6 +280,7 @@ class AuthController {
         $token = Tokenizer::generate();  // Refers to \App\Services\Auth\JWT
     }
 }
+>
 ```
 
 ### Autoloading Mechanics
@@ -293,6 +307,7 @@ spl_autoload_register(function (string $className) {
 // When execution reaches this line:
 $user = new \App\Models\User(); 
 // PHP automatically passes 'App\Models\User' to the callback above!
+>
 ```
 
 #### The PSR-4 Autoloading Standard
@@ -330,4 +345,5 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Everything below this line is automatically loaded on demand!
 $router = new \App\Core\Router();
 $router->dispatch();
+>
 ```

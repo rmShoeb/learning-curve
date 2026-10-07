@@ -27,14 +27,28 @@ theme:
     - search.suggest          # Search autocompletion
     - search.highlight        # Highlight search query matches in body
     - toc.follow
+    - content.code.copy
 
 markdown_extensions:
   - attr_list
   - md_in_html
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      linenums: true
+  - pymdownx.arithmatex:
+      generic: true
 
 plugins:
    - search
    - awesome-nav
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
