@@ -1,0 +1,15 @@
+-- CREATE OR ALTER FUNCTION uDefFunc.CalculateDiscountedPrice (
+--     @price NUMERIC(10, 2),
+--     @discount NUMERIC(10, 2)
+-- )
+-- RETURNS NUMERIC(10, 2) AS
+-- BEGIN
+--     RETURN @price*(1-@discount)
+-- END;
+-- SELECT
+--     order_id,
+--     uDefFunc.CalculateDiscountedPrice(list_price, discount) price
+-- FROM
+--     sales.order_items
+-- ORDER BY price
+-- ;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="sorted-data" hidden>
+        <input name="book" value="">
+        <input name="author" value="">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Sl no.</th>
+                <th id="book-header">Book</th>
+                <th id="author-header">Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+    <form name="add-book">
+        <input type="hidden" name="index" id="book-index">
+        <p><input type="text" name="book" id="book" placeholder="Book Name"></p>
+        <p><input type="text" name="author" id="author" placeholder="Author Name"></p>
+        <p>
+            <button id="submit-new-book">Add</button>
+            <button id="update-book" hidden>Update</button>
+        </p>
+    </form>
+    <script src="./script.js"></script>
+</body>
+</html>

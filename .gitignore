@@ -38,5 +38,9 @@ venv/
 # Build artifacts
 *.log
 *.cache
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # files to ignore

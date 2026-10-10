@@ -1,0 +1,17 @@
+.centerd-content{
+    display: flex;
+    justify-content: center;
+}
+.form {
+    width: 37.5%;
+    min-width: 250px;
+    border-radius: 5px ;
+    margin: 25px;
+    background: linear-gradient(90deg, #43cea2, #185a9d);
+    color: aquamarine;
+}
+.btn-login {
+    margin: 10px;
+    color: #fff;
+    background: linear-gradient(90deg, #0a0909, #ed7a3c);
+}

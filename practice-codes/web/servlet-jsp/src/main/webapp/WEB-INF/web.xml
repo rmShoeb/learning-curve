@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <display-name>Home</display-name>
+        <servlet-class>com.controller.Home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <display-name>AddStudentServlet</display-name>
+        <servlet-class>com.controller.AddStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <url-pattern>/addStudent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewStudentServlet</servlet-name>
+        <display-name>ViewStudentServlet</display-name>
+        <servlet-class>com.controller.ViewStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewStudentServlet</servlet-name>
+        <url-pattern>/viewdetails</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <display-name>UpdateStudentServlet</display-name>
+        <servlet-class>com.controller.UpdateStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStudentServlet</servlet-name>
+        <display-name>DeleteStudentServlet</display-name>
+        <servlet-class>com.controller.DeleteStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FetchImageServlet</servlet-name>
+        <display-name>FetchImageServlet</display-name>
+        <servlet-class>com.controller.FetchImageServlet</servlet-class>
+    </servlet>
+
+
+
+    <servlet-mapping>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <url-pattern>/updatestudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStudentServlet</servlet-name>
+        <url-pattern>/deletestudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FetchImageServlet</servlet-name>
+        <url-pattern>/fetchimage</url-pattern>
+    </servlet-mapping>
+</web-app>

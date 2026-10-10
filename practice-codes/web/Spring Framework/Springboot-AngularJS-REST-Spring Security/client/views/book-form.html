@@ -1,0 +1,27 @@
+<div class="alert alert-primary text-center h1" role="alert">
+    Add/Edit Book
+</div>
+
+<div class="row mb-3">
+    <label for="title" class="col-sm-2 col-form-label">Book Title</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="book.title" id="title" class="form-control">
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="author" class="col-sm-2 col-form-label">Author</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="book.author" id="author" class="form-control">
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-3">
+        <a ui-sref="books" class="btn btn-primary btn-sm" style="text-align: right;">Show all books</a>
+    </div>
+    <div class="col-7"></div>
+    <div class="col-2">
+        <button class="btn btn-success btn-sm" ng-click="SaveUpdateBook()">Save Book</button>
+    </div>
+</div>
+
+<ng-include src="'views/logout.html'"></ng-include>
