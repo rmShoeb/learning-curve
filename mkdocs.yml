@@ -22,7 +22,6 @@ theme:
   features:
     - navigation.indexes      # Direct link to section index pages
     - navigation.instant      # Instant page loads (SPA-like feel)
-    - navigation.tracking     # Update URL anchor on scroll
     - navigation.top
     - search.suggest          # Search autocompletion
     - search.highlight        # Highlight search query matches in body
@@ -34,9 +33,6 @@ markdown_extensions:
   - md_in_html
   - pymdownx.superfences
   - pymdownx.inlinehilite
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -50,5 +46,4 @@ plugins:
    - awesome-nav
 
 extra_javascript:
-  - javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js

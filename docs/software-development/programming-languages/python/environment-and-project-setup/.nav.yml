@@ -1,0 +1,9 @@
+title: Environment and Project Setup
+nav:
+  - venv.md
+  - packages-libraries.md
+  - packaging-architecture.md
+  - project-management.md
+  - project-layout.md
+  - build-tools.md
+  - bundling.md
