@@ -1,0 +1,5 @@
+title: Competitive Programming Tricks
+nav:
+  - recursion-limit-and-sys-setrecursionlimit.md
+  - bitwise-operations-and-bitmasks.md
+  - custom-sort-keys-functools-cmp-to-key.md

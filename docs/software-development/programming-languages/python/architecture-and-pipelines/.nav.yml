@@ -1,0 +1,4 @@
+title: Architecture and Pipelines
+nav:
+  - software-architecture-patterns.md      # Clean Arch, Hexagonal, Dependency Injection
+  - pipelining.md                          # ETL, data pipelines, task queues

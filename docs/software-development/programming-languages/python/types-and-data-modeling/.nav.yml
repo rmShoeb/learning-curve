@@ -1,0 +1,11 @@
+title: Types and Data Modeling
+nav:
+  - regex.md
+  - set-operations-and-internals.md
+  - collections-deque-defaultdict-counter.md
+  - static-typing.md
+  - type-checking.md
+  - data-modeling.md
+  - sqlalchemy.md
+  - sqlmodel.md
+  - alembic-migrations.md

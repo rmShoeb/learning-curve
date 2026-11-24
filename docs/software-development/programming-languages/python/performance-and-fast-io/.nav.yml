@@ -1,0 +1,6 @@
+title: Performance and Fast I/O
+nav:
+  - sys-stdin-readline-and-fast-io.md
+  - string-optimization-join-vs-concatenation.md
+  - list-comprehensions-vs-generator-expressions.md
+  - map-filter-zip-and-itertools.md

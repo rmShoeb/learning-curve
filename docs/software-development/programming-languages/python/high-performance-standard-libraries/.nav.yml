@@ -1,0 +1,6 @@
+title: High Performance Standard Libraries
+nav:
+  - heapq-priority-queue-operations.md
+  - bisect-binary-search-on-sorted-lists.md
+  - functools-lru-cache-and-cache.md
+  - math-module-gcd-isqrt-lcm-comb.md

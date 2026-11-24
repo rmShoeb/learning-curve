@@ -1,0 +1,4 @@
+title: Code Quality and Testing
+nav:
+  - code-quality.md                        # Ruff, Black, Flake8, Pylint
+  - automated-testing.md                   # pytest, unittest, mocking, coverage

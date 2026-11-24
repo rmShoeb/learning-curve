@@ -1,0 +1,34 @@
+CREATE TABLE authors (
+	id INTEGER NOT NULL, 
+	name VARCHAR(120) NOT NULL, 
+	country VARCHAR(80), 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+);
+
+CREATE TABLE genres (
+	id INTEGER NOT NULL, 
+	name VARCHAR(50) NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+);
+
+CREATE TABLE books (
+	id INTEGER NOT NULL, 
+	title VARCHAR(200) NOT NULL, 
+	isbn VARCHAR(20) NOT NULL, 
+	published_year INTEGER NOT NULL, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+	author_id INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (isbn), 
+	FOREIGN KEY(author_id) REFERENCES authors (id) ON DELETE CASCADE
+);
+
+CREATE TABLE book_genres (
+	book_id INTEGER NOT NULL, 
+	genre_id INTEGER NOT NULL, 
+	PRIMARY KEY (book_id, genre_id), 
+	FOREIGN KEY(book_id) REFERENCES books (id) ON DELETE CASCADE, 
+	FOREIGN KEY(genre_id) REFERENCES genres (id) ON DELETE CASCADE
+);
